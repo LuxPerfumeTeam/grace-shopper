@@ -2,7 +2,7 @@
 
 const db = require('../server/db')
 // const {User} = require('../server/db/models')
-const {Products, User, Reviews, Categories} = require('../server/db/models')
+const {Products, User, Reviews} = require('../server/db/models')
 
 const products = [
   {
@@ -56,7 +56,8 @@ const products = [
       'The most intense of the BLEU DE CHANEL fragrances. Powerful and refined, BLEU DE CHANEL Parfum for men reveals the essence of determination.',
     price: 150,
     inventory: 100,
-    image: 'man3.png'
+    image: 'man3.png',
+    categories: 'Men'
   }
 ]
 
@@ -114,13 +115,13 @@ async function seed() {
   console.log(`seeded ${products.length} products`)
   console.log(`seeded ${user.length} user`)
   console.log(`seeded ${reviews.length} reviews`)
-  console.log(`seeded ${categories.length} catagories`)
+  // console.log(`seeded ${categories.length} catagories`)
   console.log(`seeded successfully`)
 
   return Products.bulkCreate(products)
     .then(() => User.bulkCreate(user))
     .then(() => Reviews.bulkCreate(reviews))
-    .then(() => Categories.bulkCreate(categories))
+  // .then(() => Categories.bulkCreate(categories))
 }
 
 // We've separated the `seed` function from the `runSeed` function.
