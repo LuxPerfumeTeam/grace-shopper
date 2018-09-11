@@ -33,10 +33,8 @@ export const fetchCategory = gender => async dispatch => {
  */
 export default function(state = categories, action) {
   switch (action.type) {
-    case GET_CATEGORIES: {
+    case GET_CATEGORIES:
       return action.category
-    }
-
     default:
       return state
   }
