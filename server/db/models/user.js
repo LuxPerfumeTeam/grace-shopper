@@ -3,6 +3,29 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const User = db.define('user', {
+  firstName: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  lastName: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  address: {
+    type: Sequelize.STRING
+  },
+  city: {
+    type: Sequelize.STRING
+  },
+  state: {
+    type: Sequelize.STRING
+  },
+  zipcode: {
+    type: Sequelize.STRING
+  },
+  phone: {
+    type: Sequelize.STRING
+  },
   email: {
     type: Sequelize.STRING,
     unique: true,
