@@ -2,7 +2,7 @@
 
 const db = require('../server/db')
 // const {User} = require('../server/db/models')
-const {Products, User, Reviews, Catagories} = require('../server/db/index')
+const {Products, User, Reviews, Catagories} = require('../server/db/models')
 
 const products = [
   {
@@ -62,7 +62,7 @@ const user = [
     admin: true
   },
   {
-    email: 'user1@email.com',
+    email: 'user2@email.com',
     password: '1234',
     admin: false
   }
