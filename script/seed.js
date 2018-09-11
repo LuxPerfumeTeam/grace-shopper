@@ -115,11 +115,13 @@ async function seed() {
   console.log(`seeded ${products.length} products`)
   console.log(`seeded ${user.length} user`)
   console.log(`seeded ${reviews.length} reviews`)
+  // console.log(`seeded ${categories.length} catagories`)
   console.log(`seeded successfully`)
 
   return Products.bulkCreate(products)
     .then(() => User.bulkCreate(user))
     .then(() => Reviews.bulkCreate(reviews))
+  // .then(() => Categories.bulkCreate(categories))
 }
 
 // We've separated the `seed` function from the `runSeed` function.
