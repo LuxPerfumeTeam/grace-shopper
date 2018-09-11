@@ -4,15 +4,25 @@ module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    const users = await Products
-      .findAll
-      // {
-      //     include: [{model: Reviews}]
-      //   } no associations yet made
-      ()
-    res.json(users)
+    const products = await Products.findAll({
+      include: [{model: Reviews, as: 'productReviews'}]
+    })
+    res.json(products)
   } catch (err) {
     console.log('error with express route to get all perfume')
     next(err)
   }
-}) // it is also eager loading a non-existing reviews model currently
+})
+router.get('/:productId', async (req, res, next) => {
+  try {
+    const product = await Products.findAll({
+      where: {
+        id: req.params.productId
+      }
+    })
+    res.json(product)
+  } catch (err) {
+    console.log('error with express route to get single perfume')
+    next(err)
+  }
+})
