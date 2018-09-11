@@ -2,7 +2,7 @@
 
 const db = require('../server/db')
 // const {User} = require('../server/db/models')
-const {Products, User, Reviews, Catagories} = require('../server/db/models')
+const {Products, User, Reviews, Categories} = require('../server/db/models')
 
 const products = [
   {
@@ -57,11 +57,15 @@ const products = [
 
 const user = [
   {
+    firstName: 'Amy',
+    lastName: 'Johnson',
     email: 'user1@email.com',
     password: '1234',
     admin: true
   },
   {
+    firstName: 'Elvis',
+    lastName: 'King',
     email: 'user2@email.com',
     password: '1234',
     admin: false
@@ -82,7 +86,7 @@ const reviews = [
   }
 ]
 
-const catagories = [
+const categories = [
   {
     name: 'Woman',
     id: 1
@@ -105,13 +109,13 @@ async function seed() {
   console.log(`seeded ${products.length} products`)
   console.log(`seeded ${user.length} user`)
   console.log(`seeded ${reviews.length} reviews`)
-  console.log(`seeded ${catagories.length} catagories`)
+  console.log(`seeded ${categories.length} catagories`)
   console.log(`seeded successfully`)
 
   return Products.bulkCreate(products)
     .then(() => User.bulkCreate(user))
     .then(() => Reviews.bulkCreate(reviews))
-    .then(() => Catagories.bulkCreate(catagories))
+    .then(() => Categories.bulkCreate(categories))
 }
 
 // We've separated the `seed` function from the `runSeed` function.
