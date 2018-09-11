@@ -11,7 +11,8 @@ const products = [
       'The now and forever fragrance. The ultimate in femininity. N°5 continues to inspire devotion and garner acclaim, recently winning Allure Magazines Readers Choice Award for Best Classic Fragrance. In parfum form — the most powerful, long-lasting concentration of fragrance — N°5 is elevated to the fullest expression of the perfumers art. The Classic Bottle is an attractive addition to any dressing table.',
     price: 210,
     inventory: 100,
-    image: 'woman1.png'
+    image: 'woman1.png',
+    categories: 'Women'
   },
   {
     name: 'Chanel CHANCE EAU FRAÎCHE Eau de Toilette',
@@ -19,7 +20,8 @@ const products = [
       'A fresh, sparkling floral expression of CHANCE—a surge of energy that sweeps you into a whirlwind of happiness and fantasy.',
     price: 102,
     inventory: 100,
-    image: 'woman2.png'
+    image: 'woman2.png',
+    categories: 'Women'
   },
   {
     name: 'Chanel CHANCE EAU TENDRE Eau de Toilette',
@@ -27,7 +29,8 @@ const products = [
       'A youthful, romantic expression of CHANCE—a constellation of tender and vibrant notes, at once delicate and airy, with an intoxicatingly light, fruity trail.',
     price: 102,
     inventory: 100,
-    image: 'woman3.png'
+    image: 'woman3.png',
+    categories: 'Women'
   },
   {
     name: 'Chanel ALLURE HOMME Eau de Toilette',
@@ -35,7 +38,8 @@ const products = [
       'Difficult to define, and impossible to resist. Crisp and clean, warm and sexy, ALLURE HOMME is the expression of a mans charisma and inner strength.',
     price: 95,
     inventory: 100,
-    image: 'man1.png'
+    image: 'man1.png',
+    categories: 'Men'
   },
   {
     name: 'Chanel PLATINUM ÉGOÏSTE Eau de Toilette',
@@ -43,7 +47,8 @@ const products = [
       'Invigorating, woody fougère scent. The most potent, long-lasting form of mens fragrance.',
     price: 95,
     inventory: 100,
-    image: 'man2.png'
+    image: 'man2.png',
+    categories: 'Men'
   },
   {
     name: 'Chanel BLEU DE CHANEL PARFUM',
@@ -86,16 +91,16 @@ const reviews = [
   }
 ]
 
-const categories = [
-  {
-    name: 'Woman',
-    id: 1
-  },
-  {
-    name: 'Man',
-    id: 2
-  }
-]
+// const categories = [
+//   {
+//     name: 'Woman',
+//     id: 1
+//   },
+//   {
+//     name: 'Man',
+//     id: 2
+//   }
+// ]
 
 async function seed() {
   await db.sync({force: true})
