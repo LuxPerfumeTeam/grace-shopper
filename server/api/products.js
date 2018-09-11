@@ -2,22 +2,7 @@ const router = require('express').Router()
 const {Products, Reviews, Orders} = require('../db/models')
 module.exports = router
 
-router.get('/', async (req, res, next) => {
-  try {
-    const users = await Products
-      .findAll
-      // {
-      //     include: [{model: Reviews}]
-      //   } no associations yet made
-      ()
-    res.json(users)
-  } catch (err) {
-    console.log('error with express route to get all perfume')
-    next(err)
-  }
-}) // it is also eager loading a non-existing reviews model currently
-
-router.get('/:categoryName', async (req, res, next) => {
+router.get('/category/:categoryName', async (req, res, next) => {
   try {
     const category = await Products.findAll({
       where: {
@@ -31,12 +16,37 @@ router.get('/:categoryName', async (req, res, next) => {
   }
 })
 
-router.get('/cart', async (req, res, next) => {
+// router.get('/cart', async (req, res, next) => {
+//   try {
+//     const cart = await Orders.findAll()
+//     res.json(cart)
+//   } catch (err) {
+//     console.log('error with express route to get category name')
+//     next(err)
+//   }
+// })
+router.get('/:productId', async (req, res, next) => {
   try {
-    const cart = await Orders.findAll()
-    res.json(cart)
+    const product = await Products.findAll({
+      where: {
+        id: req.params.productId
+      }
+    })
+    res.json(product)
   } catch (err) {
-    console.log('error with express route to get category name')
+    console.log('error with express route to get single perfume')
+  }
+})
+
+router.get('/', async (req, res, next) => {
+  try {
+    const products = await Products.findAll({
+      include: [{model: Reviews, as: 'productReviews'}]
+    })
+    res.json(products)
+  } catch (err) {
+    console.log('error with express route to get all perfume')
     next(err)
   }
 })
+// it is also eager loading a non-existing reviews model currently

@@ -6,7 +6,8 @@ const Orders = require('./orders')
 //reviews belongs to product
 //product has many reviews
 //user needs order id
-Products.belongsTo(Reviews, {as: 'productReviews'})
+//Products.belongsTo(Reviews, {as: 'productReviews'})
+Products.hasMany(Reviews, {as: 'productReviews'})
 User.belongsTo(Reviews, {as: 'userReviews'})
 
 User.belongsTo(Orders, {as: 'userOrders'})
