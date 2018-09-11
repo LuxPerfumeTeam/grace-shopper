@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Products, Reviews} = require('../db/models')
+const {Products, Reviews, Orders} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -25,6 +25,16 @@ router.get('/:categoryName', async (req, res, next) => {
       }
     })
     res.json(category)
+  } catch (err) {
+    console.log('error with express route to get category name')
+    next(err)
+  }
+})
+
+router.get('/cart', async (req, res, next) => {
+  try {
+    const cart = await Orders.findAll()
+    res.json(cart)
   } catch (err) {
     console.log('error with express route to get category name')
     next(err)

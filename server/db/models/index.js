@@ -33,6 +33,5 @@ module.exports = {
   User,
   Reviews,
   Products,
-
   Orders
 }
