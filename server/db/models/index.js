@@ -1,7 +1,6 @@
 const User = require('./user')
 const Reviews = require('./reviews')
 const Products = require('./products')
-const Categories = require('./categories')
 const Orders = require('./orders')
 
 //reviews belongs to product
@@ -34,6 +33,6 @@ module.exports = {
   User,
   Reviews,
   Products,
-  Categories,
+
   Orders
 }

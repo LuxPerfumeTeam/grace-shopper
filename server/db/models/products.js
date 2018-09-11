@@ -23,6 +23,12 @@ const Products = db.define('products', {
   image: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  categories: {
+    type: Sequelize.STRING,
+    validate: {
+      isIn: [['Men', 'Women']]
+    }
   }
 })
 
