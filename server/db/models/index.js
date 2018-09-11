@@ -1,7 +1,7 @@
 const User = require('./user')
 const Reviews = require('./reviews')
 const Products = require('./products')
-const Catagories = require('./catagories')
+const Categories = require('./categories')
 const Orders = require('./orders')
 
 /**
@@ -21,6 +21,6 @@ module.exports = {
   User,
   Reviews,
   Products,
-  Catagories,
+  Categories,
   Orders
 }
