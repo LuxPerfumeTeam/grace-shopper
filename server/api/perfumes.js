@@ -1,9 +1,18 @@
 const router = require('express').Router()
-const {Perfumes} = require('../db/models')
+const {Products} = require('../db/models')
 module.exports = router
+
+router.get('/', async (req, res, next) => {
+  try {
+    const perfumes = await Products.findAll()
+    res.json(perfumes)
+  } catch (error) {
+    console.error(error)
+  }
+})
 router.get('/:category', async (req, res, next) => {
   try {
-    const womensPerfume = Perfumes.findAll({
+    const womensPerfume = Products.findAll({
       where: {
         category: req.params.category
       }
