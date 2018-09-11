@@ -12,7 +12,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
     <nav>
       {categoryArr.map(each => {
         return (
-          <Link key={each} to={`/${each}`}>
+          <Link key={each} to={`/category/${each}`}>
             {each}
           </Link>
         )
