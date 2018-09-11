@@ -4,10 +4,19 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
+const categoryArr = ['Men', 'Women']
+
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
-    <h1>BOILERMAKER</h1>
+    <h1>LuxPerfume</h1>
     <nav>
+      {categoryArr.map(each => {
+        return (
+          <Link key={each} to={`/category/${each}`}>
+            {each}
+          </Link>
+        )
+      })}
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
