@@ -2,6 +2,7 @@ const User = require('./user')
 const Reviews = require('./reviews')
 const Products = require('./products')
 const Orders = require('./orders')
+const Cart = require('./cart')
 
 //reviews belongs to product
 //product has many reviews

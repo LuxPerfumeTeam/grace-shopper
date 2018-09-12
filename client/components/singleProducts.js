@@ -14,6 +14,9 @@ class SingleProduct extends Component {
     return (
       <div>
         <li key={selectedProduct.id}>
+          <button onClick={() => addToCart(selectedProduct.id)}>
+            Add to Cart
+          </button>
           <h2> {selectedProduct.name}</h2>
           <img src={'/' + selectedProduct.image} />
           {selectedProduct.description}
