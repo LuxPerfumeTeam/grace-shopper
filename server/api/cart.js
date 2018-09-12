@@ -1,8 +1,21 @@
-const router = require('express').Router()
-const Cart = require('../db/models')
+var express = require('express')
+var cookieParser = require('cookie-parser')
+var session = require('express-session')
+const app = express()
+const Cart = require('../db')
+app.use(
+  session({
+    secret: 'Shh, its a secret!',
+    resave: false,
+    saveUninitialized: true
+  })
+)
+app.use(cookieParser())
+const router = app.Router()
 module.exports = router
 
 router.get('/', async (req, res, next) => {
+  // console.log('req.session', req.session)
   try {
     const cart = await Cart.findAll()
     if (cart.length) {

@@ -8,7 +8,9 @@ const categoryArr = ['Men', 'Women']
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
-    <h1>LuxPerfume</h1>
+    <Link to="/home">
+      <h1>LuxPerfume</h1>
+    </Link>
     <nav>
       {categoryArr.map(each => {
         return (
