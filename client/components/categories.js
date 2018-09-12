@@ -38,9 +38,11 @@ class Categories extends Component {
         {genderCategory.map(product => {
           return (
             <div key={product.id}>
-              <img src={'/' + product.image} />
+              <Link to={`/products/${product.id}`}>
+                <img src={'/' + product.image} />
 
-              {product.name}
+                {product.name}
+              </Link>
               {product.price}
             </div>
           )
