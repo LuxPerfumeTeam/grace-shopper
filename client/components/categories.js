@@ -28,6 +28,8 @@ class Categories extends Component {
     }
   }
 
+  //do the onClick invoking a function that invokes a thunk creator
+
   render() {
     const gender = this.props.match.params.categoryName
     const genderCategory = this.props.genderCategory

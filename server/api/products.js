@@ -1,10 +1,10 @@
 const router = require('express').Router()
-const {Products, Reviews} = require('../db/models')
+const {Product, Review} = require('../db/models')
 module.exports = router
 
 router.get('/category/:categoryName', async (req, res, next) => {
   try {
-    const category = await Products.findAll({
+    const category = await Product.findAll({
       where: {
         categories: req.params.categoryName
       }
@@ -15,9 +15,20 @@ router.get('/category/:categoryName', async (req, res, next) => {
     next(err)
   }
 })
+
+// categories api use query in REPLACEMENT please do it in the homepage of products and need the front end to adjst with the ?
+// /api/products?category=men
+// req.query.category would equal men
+// let where = {
+//   id: req.params.productId
+// }
+// console.log(req.query.category)
+// if (req.query.category) {
+//   where.category = req.query.category
+// }
 router.get('/:productId', async (req, res, next) => {
   try {
-    const product = await Products.findAll({
+    const product = await Product.findAll({
       where: {
         id: req.params.productId
       }
@@ -30,8 +41,8 @@ router.get('/:productId', async (req, res, next) => {
 
 router.get('/', async (req, res, next) => {
   try {
-    const products = await Products.findAll({
-      include: [{model: Reviews, as: 'productReviews'}]
+    const products = await Product.findAll({
+      include: [{model: Review, as: 'productReviews'}]
     })
     res.json(products)
   } catch (err) {
@@ -39,4 +50,3 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
-// it is also eager loading a non-existing reviews model currently
