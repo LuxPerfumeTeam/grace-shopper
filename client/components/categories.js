@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {fetchCategory} from '../store/categories'
-import {Link} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
 
 class Categories extends Component {
   constructor(props) {
@@ -31,7 +31,10 @@ class Categories extends Component {
   render() {
     const gender = this.props.match.params.categoryName
     const genderCategory = this.props.genderCategory
-
+    console.log('genderCatgory', genderCategory)
+    if (!genderCategory.length) {
+      return <h2>No Products Yet</h2>
+    }
     return (
       <div>
         <h2>{gender}</h2>
@@ -61,10 +64,11 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchCategory: gender => {
-      console.log('fetching', gender)
       dispatch(fetchCategory(gender))
     }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Categories)
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Categories)
+)
