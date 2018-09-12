@@ -9,7 +9,7 @@ class Homepage extends Component {
   }
   render() {
     const products = this.props.products
-    console.log('what is showing on homepage', this.props)
+
     return <AllProducts products={products} />
   }
 }
