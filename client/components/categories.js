@@ -38,9 +38,11 @@ class Categories extends Component {
         {genderCategory.map(product => {
           return (
             <div key={product.id}>
-              <img src={'/' + product.image} />
-
-              {product.name}
+              <Link to={`/products/${product.id}`}>
+                <img src={'/' + product.image} />
+                {product.name}
+                }
+              </Link>
               {product.price}
             </div>
           )
@@ -59,7 +61,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchCategory: gender => {
-      console.log('fetching', gender)
       dispatch(fetchCategory(gender))
     }
   }
