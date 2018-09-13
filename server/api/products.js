@@ -22,6 +22,15 @@ router.get('/category/:categoryName', async (req, res, next) => {
     next(err)
   }
 })
+router.get('/category', async (req, res, next) => {
+  try {
+    const category = await Category.findAll()
+    res.json(category)
+  } catch (err) {
+    console.log('error with express route to get all perfume')
+    next(err)
+  }
+})
 
 // categories api use query in REPLACEMENT please do it in the homepage of products and need the front end to adjst with the ?
 // /api/products?category=men
