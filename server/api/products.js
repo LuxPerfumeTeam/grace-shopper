@@ -1,15 +1,20 @@
 const router = require('express').Router()
-const {Product, Review} = require('../db/models')
+const {Product, Review, Category} = require('../db/models')
 module.exports = router
 
 router.get('/category/:categoryName', async (req, res, next) => {
   try {
-    const category = await Product.findAll({
+    const category = await Category.findAll({
       where: {
-        categories: req.params.categoryName
+        name: req.params.categoryName
       }
     })
-    res.json(category)
+    const categoryProducts = await Product.findAll({
+      where: {
+        category: category.id
+      }
+    })
+    res.json(categoryProducts)
   } catch (err) {
     console.log('error with express route to get category name')
     next(err)
