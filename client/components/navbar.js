@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
 import {logout} from '../store'
-import fetchCategoryTypes from '../store'
 
 const categoryArr = ['Men', 'Women']
 
-const Navbar = ({handleClick, isLoggedIn, types, fetchCategoryTypes}) => {
+const Navbar = props => {
+  const {handleClick, isLoggedIn} = props
   return (
     <div>
       <Link to="/home">
@@ -59,7 +59,7 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapState, mapDispatch)(Navbar)
+export default withRouter(connect(mapState, mapDispatch)(Navbar))
 
 /**
  * PROP TYPES
