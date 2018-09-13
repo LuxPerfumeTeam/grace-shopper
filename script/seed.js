@@ -2,7 +2,7 @@
 
 const db = require('../server/db')
 // const {User} = require('../server/db/models')
-const {Products, User, Reviews} = require('../server/db/models')
+const {Product, User, Review} = require('../server/db/models')
 
 const products = [
   {
@@ -92,36 +92,19 @@ const reviews = [
   }
 ]
 
-// const categories = [
-//   {
-//     name: 'Woman',
-//     id: 1
-//   },
-//   {
-//     name: 'Man',
-//     id: 2
-//   }
-// ]
-
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  // const users = await Promise.all([
-  //   User.create({email: 'cody@email.com', password: '123'}),
-  //   User.create({email: 'murphy@email.com', password: '123'})
-  // ])
-
   console.log(`seeded ${products.length} products`)
   console.log(`seeded ${user.length} user`)
   console.log(`seeded ${reviews.length} reviews`)
-  // console.log(`seeded ${categories.length} catagories`)
+
   console.log(`seeded successfully`)
 
-  return Products.bulkCreate(products)
+  return Product.bulkCreate(products)
     .then(() => User.bulkCreate(user))
-    .then(() => Reviews.bulkCreate(reviews))
-  // .then(() => Categories.bulkCreate(categories))
+    .then(() => Review.bulkCreate(reviews))
 }
 
 // We've separated the `seed` function from the `runSeed` function.

@@ -24,7 +24,7 @@ export const fetchCategory = gender => async dispatch => {
     const res = await axios.get(`/api/products/category/${gender}`)
     dispatch(getCategories(res.data || categories))
   } catch (err) {
-    console.error(err)
+    console.error('hey there is an error with fetchCategory', err)
   }
 }
 

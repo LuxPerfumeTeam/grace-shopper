@@ -22,17 +22,24 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route path="/home" component={Homepage} />
         <Route path="/products/:productId" component={SingleProduct} />
-
+        <Route exact path="/category/:categoryName" component={Categories} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
+            <Route path="/products/:productId" component={SingleProduct} />
+            <Route
+              exact
+              path="/category/:categoryName"
+              component={Categories}
+            />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
-        <Route exact path="/category/:categoryName" component={Categories} />
+
         <Route component={Login} />
       </Switch>
     )

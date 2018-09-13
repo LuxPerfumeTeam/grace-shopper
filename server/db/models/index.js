@@ -1,22 +1,18 @@
 const User = require('./user')
-const Reviews = require('./reviews')
-const Products = require('./products')
+const Review = require('./review')
+const Product = require('./product')
 const Orders = require('./orders')
 const Cart = require('./cart')
 
-//reviews belongs to product
-//product has many reviews
-//user needs order id
-//Products.belongsTo(Reviews, {as: 'productReviews'})
-Products.hasMany(Reviews, {as: 'productReviews'})
-User.belongsTo(Reviews, {as: 'userReviews'})
+Product.hasMany(Review, {as: 'productReviews'})
+User.belongsTo(Review, {as: 'userReview'})
 
 User.belongsTo(Orders, {as: 'userOrders'})
-Orders.belongsToMany(Products, {through: 'orderProducts'})
-Products.belongsToMany(Orders, {through: 'orderProducts'})
-// Reviews.belongsTo(User)
-// Reviews.belongsTo(Products)
-// Products.hasMany(Reviews)
+// Orders.belongsToMany(Products, {through: 'orderProducts'})
+// Products.belongsToMany(Orders, {through: 'orderProducts'})
+
+// Create the orderProduct model with quantity
+//Order needs userid, status(open order could be your cart),
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -33,8 +29,8 @@ Products.belongsToMany(Orders, {through: 'orderProducts'})
  */
 module.exports = {
   User,
-  Reviews,
-  Products,
+  Review,
+  Product,
 
   Orders
 }
