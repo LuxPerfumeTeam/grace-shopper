@@ -2,7 +2,7 @@
 
 const db = require('../server/db')
 // const {User} = require('../server/db/models')
-const {Product, User, Review, Category} = require('../server/db/models')
+const {Product, User, Review} = require('../server/db/models')
 
 const products = [
   {
@@ -12,7 +12,7 @@ const products = [
     price: 210,
     inventory: 100,
     image: 'woman1.png',
-    category: 1
+    categories: 'Women'
   },
   {
     name: 'Chanel CHANCE EAU FRAÎCHE Eau de Toilette',
@@ -21,7 +21,7 @@ const products = [
     price: 102,
     inventory: 100,
     image: 'woman2.png',
-    category: 1
+    categories: 'Women'
   },
   {
     name: 'Chanel CHANCE EAU TENDRE Eau de Toilette',
@@ -30,7 +30,7 @@ const products = [
     price: 102,
     inventory: 100,
     image: 'woman3.png',
-    category: 1
+    categories: 'Women'
   },
   {
     name: 'Chanel ALLURE HOMME Eau de Toilette',
@@ -39,7 +39,7 @@ const products = [
     price: 95,
     inventory: 100,
     image: 'man1.png',
-    category: 2
+    categories: 'Men'
   },
   {
     name: 'Chanel PLATINUM ÉGOÏSTE Eau de Toilette',
@@ -48,7 +48,7 @@ const products = [
     price: 95,
     inventory: 100,
     image: 'man2.png',
-    category: 2
+    categories: 'Men'
   },
   {
     name: 'Chanel BLEU DE CHANEL PARFUM',
@@ -57,7 +57,7 @@ const products = [
     price: 150,
     inventory: 100,
     image: 'man3.png',
-    category: 2
+    categories: 'Men'
   }
 ]
 
@@ -92,15 +92,6 @@ const reviews = [
   }
 ]
 
-const categories = [
-  {
-    name: 'Women'
-  },
-  {
-    name: 'Men'
-  }
-]
-
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
@@ -108,13 +99,12 @@ async function seed() {
   console.log(`seeded ${products.length} products`)
   console.log(`seeded ${user.length} user`)
   console.log(`seeded ${reviews.length} reviews`)
-  console.log(`seeded ${categories.length} category`)
+
   console.log(`seeded successfully`)
 
   return Product.bulkCreate(products)
     .then(() => User.bulkCreate(user))
     .then(() => Review.bulkCreate(reviews))
-    .then(() => Category.bulkCreate(categories))
 }
 
 // We've separated the `seed` function from the `runSeed` function.
