@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {fetchProducts} from '../store/product'
 import {withRouter, NavLink} from 'react-router-dom'
 import AllProducts from './allProducts'
+import Order from './order'
 class Homepage extends Component {
   componentDidMount() {
     this.props.fetchProducts()
@@ -10,7 +11,12 @@ class Homepage extends Component {
   render() {
     const products = this.props.products
 
-    return <AllProducts products={products} />
+    return (
+      <div>
+        <AllProducts products={products} />
+        <Order />
+      </div>
+    )
   }
 }
 

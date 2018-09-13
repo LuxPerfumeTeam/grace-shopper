@@ -9,7 +9,14 @@ router.get('/category/:categoryName', async (req, res, next) => {
         categories: req.params.categoryName
       }
     })
-    res.json(category)
+
+    console.log('what is category', category)
+    const categoryProducts = await Product.findAll({
+      where: {
+        categoryId: category[0].id
+      }
+    })
+    res.json(categoryProducts)
   } catch (err) {
     console.log('error with express route to get category name')
     next(err)
