@@ -3,14 +3,20 @@ import {connect} from 'react-redux'
 import {fetchProducts} from '../store/product'
 import {withRouter, NavLink} from 'react-router-dom'
 import AllProducts from './allProducts'
+import Order from './order'
 class Homepage extends Component {
   componentDidMount() {
     this.props.fetchProducts()
   }
   render() {
     const products = this.props.products
-    console.log('what is showing on homepage', this.props)
-    return <AllProducts products={products} />
+
+    return (
+      <div>
+        <AllProducts products={products} />
+        <Order />
+      </div>
+    )
   }
 }
 

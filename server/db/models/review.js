@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Reviews = db.define('reviews', {
+const Review = db.define('review', {
   description: {type: Sequelize.TEXT}
 })
 
-module.exports = Reviews
+module.exports = Review

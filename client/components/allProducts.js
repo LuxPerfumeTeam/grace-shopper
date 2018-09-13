@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 class AllProducts extends Component {
   render() {
     const products = this.props.products
-    console.log('products', products)
 
     return (
       <div>
@@ -11,8 +10,10 @@ class AllProducts extends Component {
         <ul>
           {products.map(product => (
             <li key={product.id}>
-              <img src={product.image} />
-              <Link to={`/products/${product.id}`}>{product.name}</Link>
+              <Link to={`/products/${product.id}`}>
+                <img src={product.image} />
+                {product.name}
+              </Link>
             </li>
           ))}
         </ul>
