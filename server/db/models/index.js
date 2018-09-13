@@ -13,11 +13,11 @@ Product.belongsTo(Category)
 
 // Orders.belongsToMany(Products, {through: 'orderProducts'})
 // Products.belongsToMany(Orders, {through: 'orderProducts'})
+
 User.belongsToMany(Orders, {through: 'userOrders'})
 //Orders.belongsToMany(Products, {through: 'OrderProducts'})
 
-//HEY GUYS ITS FROM YOU
-
+//FROM YOU GUYS
 // Products.belongsToMany(Orders, {through: 'OrderProducts'})
 // Orders.belongsTo(Products, {as: 'orderProducts'})
 // Orders.belongsTo(User, {as: 'userOrder'})
