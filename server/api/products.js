@@ -9,9 +9,11 @@ router.get('/category/:categoryName', async (req, res, next) => {
         name: req.params.categoryName
       }
     })
+
+    console.log('what is category', category)
     const categoryProducts = await Product.findAll({
       where: {
-        category: category.id
+        categoryId: category[0].id
       }
     })
     res.json(categoryProducts)

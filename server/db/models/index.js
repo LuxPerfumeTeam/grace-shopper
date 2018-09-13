@@ -7,9 +7,9 @@ const Category = require('./category')
 Product.hasMany(Review, {as: 'productReviews'})
 User.belongsTo(Review, {as: 'userReview'})
 
-User.belongsTo(Orders, {as: 'userOrders'})
+// User.belongsTo(Orders, {as: 'userOrders'})
 
-Product.belongsTo(Category, {as: 'category'})
+Product.belongsTo(Category)
 // Category.hasMany(Product)
 
 // Orders.belongsToMany(Products, {through: 'orderProducts'})
