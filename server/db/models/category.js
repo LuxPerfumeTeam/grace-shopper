@@ -6,5 +6,5 @@ const Category = db.define('category', {
     type: Sequelize.STRING
   }
 })
-
+//change
 module.exports = Category

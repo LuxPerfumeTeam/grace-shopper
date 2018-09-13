@@ -18,7 +18,9 @@ router.get('/category/:categoryName', async (req, res, next) => {
     })
     res.json(categoryProducts)
   } catch (err) {
-    console.log('error with express route to get category name')
+    console.log(
+      'error with express route to get all products with that category name'
+    )
     next(err)
   }
 })
@@ -27,7 +29,7 @@ router.get('/category', async (req, res, next) => {
     const category = await Category.findAll()
     res.json(category)
   } catch (err) {
-    console.log('error with express route to get all perfume')
+    console.log('error with express route to get all categories')
     next(err)
   }
 })
