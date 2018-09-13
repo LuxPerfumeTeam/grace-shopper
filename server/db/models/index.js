@@ -6,6 +6,13 @@ const Orders = require('./orders')
 Product.hasMany(Review, {as: 'productReviews'})
 User.belongsTo(Review, {as: 'userReview'})
 
+// User.belongsTo(Orders, {as: 'userOrders'}) //it comes up 3x user with order so don't know which is supposed to be the right one
+
+Product.belongsTo(Category)
+
+// Orders.belongsToMany(Products, {through: 'orderProducts'})
+// Products.belongsToMany(Orders, {through: 'orderProducts'})
+
 User.belongsToMany(Orders, {through: 'userOrders'})
 //Orders.belongsToMany(Products, {through: 'OrderProducts'})
 Products.belongsToMany(Orders, {through: 'OrderProducts'})

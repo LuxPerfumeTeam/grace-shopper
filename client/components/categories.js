@@ -33,7 +33,6 @@ class Categories extends Component {
   render() {
     const gender = this.props.match.params.categoryName
     const genderCategory = this.props.genderCategory
-    console.log('genderCatgory', genderCategory)
     if (!genderCategory.length) {
       return <h2>No Products Yet</h2>
     }
