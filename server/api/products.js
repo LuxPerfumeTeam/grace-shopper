@@ -1,19 +1,18 @@
 const router = require('express').Router()
-const {Product, Review} = require('../db/models')
+const {Product, Review, Category} = require('../db/models')
 module.exports = router
 
 router.get('/category/:categoryName', async (req, res, next) => {
   try {
-    const category = await Product.findAll({
+    const category = await Category.findOne({
       where: {
-        categories: req.params.categoryName
+        name: req.params.categoryName
       }
     })
 
-    console.log('what is category', category)
     const categoryProducts = await Product.findAll({
       where: {
-        categoryId: category[0].id
+        categoryId: category.id
       }
     })
     res.json(categoryProducts)
