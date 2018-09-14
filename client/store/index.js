@@ -19,7 +19,14 @@ const reducer = combineReducers({
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
-const store = createStore(reducer, middleware)
+
+const initialState = localStorage.state
+  ? JSON.parse(localStorage.state)
+  : undefined
+const store = createStore(reducer, initialState, middleware)
+store.subscribe(() => {
+  localStorage.state = JSON.stringify(store.getState())
+})
 
 export default store
 export * from './user'
