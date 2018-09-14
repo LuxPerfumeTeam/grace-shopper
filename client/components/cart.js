@@ -14,6 +14,8 @@ class Cart extends Component {
     this.props.fetchCart()
   }
   render() {
+    console.log('props', this.props)
+    console.log('state', this.state)
     return 'Hi'
     // <div>
     //   <h3>Shopping Cart HELLO</h3>
@@ -63,7 +65,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    order: state.cart
+    cart: state.cart
   }
 }
 

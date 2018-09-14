@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+const storage = window.localStorage
 //ACTION TYPES
 const SELECT_PRODUCT = 'SELECT_PRODUCT'
 
