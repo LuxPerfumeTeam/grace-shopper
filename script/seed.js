@@ -2,9 +2,7 @@
 
 const db = require('../server/db')
 
-
 const {Product, User, Review, Category} = require('../server/db/models')
-
 
 const categories = [
   {
@@ -25,7 +23,6 @@ const products = [
     image: 'woman1.png',
 
     categoryId: 1
-
   },
   {
     name: 'Chanel CHANCE EAU FRAÎCHE Eau de Toilette',
@@ -36,7 +33,6 @@ const products = [
     image: 'woman2.png',
 
     categoryId: 1
-
   },
   {
     name: 'Chanel CHANCE EAU TENDRE Eau de Toilette',
@@ -47,7 +43,6 @@ const products = [
     image: 'woman3.png',
 
     categoryId: 1
-
   },
   {
     name: 'Chanel ALLURE HOMME Eau de Toilette',
@@ -58,7 +53,6 @@ const products = [
     image: 'man1.png',
 
     categoryId: 2
-
   },
   {
     name: 'Chanel PLATINUM ÉGOÏSTE Eau de Toilette',
@@ -69,7 +63,6 @@ const products = [
     image: 'man2.png',
 
     categoryId: 2
-
   },
   {
     name: 'Chanel BLEU DE CHANEL PARFUM',
@@ -80,7 +73,6 @@ const products = [
     image: 'man3.png',
 
     categoryId: 2
-
   }
 ]
 
@@ -118,6 +110,26 @@ const reviews = [
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
+
+  const users = await Promise.all([
+    User.create({
+      firstName: 'Elvis',
+      lastName: 'King',
+      email: 'user2@email.com',
+      password: '1234',
+      admin: false
+    }),
+    User.create({
+      firstName: 'Amy',
+      lastName: 'Johnson',
+      email: 'user1@email.com',
+      password: '1234',
+      admin: true
+    })
+  ])
+
+  console.log(`seeded ${users.length} users`)
+  console.log(`seeded successfully`)
 
   console.log(`seeded ${products.length} products`)
   console.log(`seeded ${user.length} user`)

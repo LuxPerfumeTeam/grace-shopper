@@ -6,7 +6,7 @@ import {
   Login,
   Signup,
   UserHome,
-  Homepage,
+  AllProducts,
   SingleProduct,
   Cart,
   BuyingForm
@@ -29,7 +29,7 @@ class Routes extends Component {
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route exact path="/cart" component={Cart} />
-        <Route exact path="/" component={Homepage} />
+        <Route exact path="/" component={AllProducts} />
         <Route path="/BuyingForm" component={BuyingForm} />
         <Route path="/products/:productId" component={SingleProduct} />
         <Route exact path="/category/:categoryName" component={Categories} />
