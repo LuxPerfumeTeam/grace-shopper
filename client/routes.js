@@ -27,6 +27,7 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
+
         <Route exact path="/" component={Homepage} />
         <Route path="/BuyingForm" component={BuyingForm} />
         <Route path="/products/:productId" component={SingleProduct} />

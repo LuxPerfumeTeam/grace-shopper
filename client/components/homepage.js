@@ -11,12 +11,14 @@ class Homepage extends Component {
   render() {
     const products = this.props.products
 
+
     return (
       <div>
         <AllProducts products={products} />
         <Order />
       </div>
     )
+
   }
 }
 
