@@ -2,9 +2,7 @@
 
 const db = require('../server/db')
 
-
 const {Product, User, Review, Category} = require('../server/db/models')
-
 
 const categories = [
   {
@@ -25,7 +23,6 @@ const products = [
     image: 'woman1.png',
 
     categoryId: 1
-
   },
   {
     name: 'Chanel CHANCE EAU FRAÎCHE Eau de Toilette',
@@ -36,7 +33,6 @@ const products = [
     image: 'woman2.png',
 
     categoryId: 1
-
   },
   {
     name: 'Chanel CHANCE EAU TENDRE Eau de Toilette',
@@ -47,7 +43,6 @@ const products = [
     image: 'woman3.png',
 
     categoryId: 1
-
   },
   {
     name: 'Chanel ALLURE HOMME Eau de Toilette',
@@ -58,7 +53,6 @@ const products = [
     image: 'man1.png',
 
     categoryId: 2
-
   },
   {
     name: 'Chanel PLATINUM ÉGOÏSTE Eau de Toilette',
@@ -69,7 +63,6 @@ const products = [
     image: 'man2.png',
 
     categoryId: 2
-
   },
   {
     name: 'Chanel BLEU DE CHANEL PARFUM',
@@ -80,7 +73,6 @@ const products = [
     image: 'man3.png',
 
     categoryId: 2
-
   }
 ]
 
