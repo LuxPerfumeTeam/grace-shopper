@@ -67,7 +67,7 @@ export const fetchCart = () => {
   }
 }
 
-export const decrementQuantity = product => {
+export const fetchDecrementQuantity = product => {
   return async dispatch => {
     const response = await axios.delete(`/api/cart/${product.id}`)
     const removed = response.data
@@ -99,7 +99,7 @@ export default function(state = cart, action) {
     case ADD_TO_CART:
       return [...state, action.product]
     case GET_CART:
-      return state
+      return action.cart
     case DECREMENT_QUANTITY:
       let indPr = state.findIndex(prod => prod.id === action.product.id)
       let currState = state

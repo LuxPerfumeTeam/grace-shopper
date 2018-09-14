@@ -12,6 +12,8 @@
 // )
 // app.use(cookieParser())
 const Orders = require('../db/models/orders')
+
+const Product = require('../db/models/product')
 const router = require('express').Router()
 module.exports = router
 
@@ -25,10 +27,12 @@ router.get('/', async (req, res, next) => {
   //upon login: is there an open order? if so, merge with req.session. if not, create it.
   //shop on amazon incognito and nonincognito. then log in - compare carts
   try {
-    const orderId = await Orders.findById(req.id)
+    const order = await Orders.findAll({
+      include: [{model: Product, as: 'orderProducts'}]
+    })
 
-    if (orderId) {
-      res.json(orderId)
+    if (order) {
+      res.json(order)
     } else {
       res.send('The order is empty')
     }

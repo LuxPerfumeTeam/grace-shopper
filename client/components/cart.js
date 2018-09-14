@@ -10,10 +10,17 @@ import {
 } from '../store/cart'
 
 class Cart extends Component {
+  constructor() {
+    super()
+    this.state = {
+      // quantity: this.props.item.quantity,
+    }
+  }
   componentDidMount() {
     this.props.fetchCart()
   }
   render() {
+    console.log('Whats in my cart?', this.props.cart)
     return 'Hi'
     // <div>
     //   <h3>Shopping Cart HELLO</h3>
@@ -26,14 +33,14 @@ class Cart extends Component {
     //       <td>{item.price}</td>
     //       <td>{item.quantity}</td>
     //       <div>
-    //         <button type="button" onClick={() => this.props.addToCart(item)}>
-    //           add
+    //         <button type="button" onClick={() => this.setState(this.state.quantity++)}>
+    //           +
     //         </button>
     //         <button
     //           type="button"
-    //           onClick={() => this.props.decrementQuantity(item)}
+    //           onClick={() => this.setState(this.state.quantity--)}
     //         >
-    //           remove
+    //           -
     //         </button>
     //         <button
     //           type="button"
@@ -63,7 +70,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    order: state.cart
+    cart: state.cart
   }
 }
 
