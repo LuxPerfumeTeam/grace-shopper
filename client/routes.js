@@ -27,7 +27,8 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
-        <Route path="/home" component={Homepage} />
+
+        <Route exact path="/" component={Homepage} />
         <Route path="/BuyingForm" component={BuyingForm} />
         <Route path="/products/:productId" component={SingleProduct} />
         <Route exact path="/category/:categoryName" component={Categories} />
@@ -37,7 +38,7 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
+            <Route exact path="/home" component={UserHome} />
             <Route path="/products/:productId" component={SingleProduct} />
             <Route
               exact

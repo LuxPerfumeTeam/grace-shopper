@@ -10,7 +10,7 @@ const Navbar = props => {
   const {handleClick, isLoggedIn} = props
   return (
     <div>
-      <Link to="/home">
+      <Link to="/">
         <h1>LuxPerfume</h1>
       </Link>
       <nav>
@@ -24,7 +24,7 @@ const Navbar = props => {
         {isLoggedIn ? (
           <div>
             {/* The navbar will show these links after you log in */}
-            <Link to="/home">Home</Link>
+            <Link to="/home">My Account</Link>
             <a href="#" onClick={handleClick}>
               Logout
             </a>
