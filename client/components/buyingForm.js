@@ -64,8 +64,8 @@ export default class BuyingForm extends Component {
     if (errors.length > 0) {
       this.setState({errors})
     } else {
-      this.props.addStudent(this.state)
-      this.props.history.push('/homepage')
+      // this.props.addStudent(this.state)
+      // this.props.history.push('/homepage')
     }
   }
 

@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {fetchProducts} from '../store/product'
 import {withRouter, NavLink} from 'react-router-dom'
 import AllProducts from './allProducts'
-import Cart from './cart'
+// import Cart from './cart'
 class Homepage extends Component {
   componentDidMount() {
     this.props.fetchProducts()
@@ -14,7 +14,6 @@ class Homepage extends Component {
     return (
       <div>
         <AllProducts products={products} />
-        <Cart />
       </div>
     )
   }
