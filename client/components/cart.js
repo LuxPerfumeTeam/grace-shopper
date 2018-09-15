@@ -14,9 +14,8 @@ class Cart extends Component {
     this.props.fetchCart()
   }
   render() {
-    const items = this.props.cart.items
+    const items = this.props.cart
     console.log('HELLO props', this.props.cart)
-    console.log('HELLO localStorage', localStorage.getItem('cartList'))
     return (
       <div>
         <h3>Shopping Cart HELLO</h3>

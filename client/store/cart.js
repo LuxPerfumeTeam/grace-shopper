@@ -42,8 +42,9 @@ function clearCart() {
 //THUNK
 export const fetchAddToCart = product => {
   return dispatch => {
-    localStorage.setItem('product', JSON.stringify(product))
-    const addedProduct = JSON.parse(localStorage.getItem('product'))
+    const id = product.id
+    localStorage.setItem(`${id}`, JSON.stringify(product))
+    const addedProduct = JSON.parse(localStorage.getItem(`${id}`))
     const action = addToCart(addedProduct)
     dispatch(action)
   }
@@ -51,10 +52,17 @@ export const fetchAddToCart = product => {
 
 export const fetchCart = () => {
   return dispatch => {
-    const arrayOfItems = Object.keys(localStorage)
-    const items = JSON.parse(localStorage.getItem('product'))
-    console.log('what is this?', JSON.parse(localStorage.getItem('product')))
-    const action = getCart(items)
+    const arrOfId = Object.keys(localStorage)
+    const uniqueArrId = arrOfId.filter(function(item, pos, self) {
+      return self.indexOf(item) === pos
+    })
+    const arrOfProducts = uniqueArrId.map(each => {
+      let value = localStorage[each]
+      return JSON.parse(value)
+    })
+    console.log('what is this?', arrOfProducts)
+
+    const action = getCart(arrOfProducts)
     dispatch(action)
   }
 }
@@ -80,8 +88,8 @@ export default function(state = cart, action) {
   switch (action.type) {
     case ADD_TO_CART:
       return {...state, items: [...state.items, action.product]}
-    // case GET_CART:
-    //   return [...state.itemsaction.items
+    case GET_CART:
+      return action.items
     case DELETE_PRODUCT:
       return action.product
     case CLEAR_CART:
