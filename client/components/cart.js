@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
-import {fetchCart, fetchDeleteProduct, clearAll} from '../store/cart'
+import {fetchCart, clearAll} from '../store/cart'
 
 class Cart extends Component {
   constructor() {
@@ -9,9 +9,13 @@ class Cart extends Component {
     this.state = {
       quantity: 1
     }
+    this.refresh = this.refresh.bind(this)
   }
   componentDidMount() {
     this.props.fetchCart()
+  }
+  refresh() {
+    location.reload()
   }
   render() {
     const items = this.props.cart
@@ -42,8 +46,8 @@ class Cart extends Component {
                   <button
                     type="button"
                     onClick={() => {
-                      this.props.fetchDeleteProduct(item.id)
-                      this.props.history.push('/cart')
+                      localStorage.removeItem(`${item.id}`)
+                      this.refresh()
                     }}
                   >
                     remove
@@ -62,7 +66,6 @@ class Cart extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     fetchCart: () => dispatch(fetchCart()),
-    fetchDeleteProduct: id => dispatch(fetchDeleteProduct(id)),
     clearCart: () => dispatch(clearAll())
   }
 }

@@ -67,16 +67,6 @@ export const fetchCart = () => {
   }
 }
 
-export const fetchDeleteProduct = id => {
-  return dispatch => {
-    const items = JSON.parse(localStorage.getItem('product'))
-    console.log('what is cart list?', cartList)
-    const deleted = JSON.parse(localStorage.removeItem('product'))
-    const action = deleteProduct(deleted)
-    dispatch(action)
-  }
-}
-
 export const clearAll = () => {
   return dispatch => {
     localStorage.clear()
