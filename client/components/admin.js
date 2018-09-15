@@ -1,35 +1,34 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
+import React, {Component} from 'react'
+// import {connect} from 'react-redux'
+import AdminCategoryForm from './adminCategoryForm'
+import AdminProductForm from './adminProductForm '
 
-/**
- * COMPONENT
- */
-export const UserHome = props => {
-  const {email} = props
+export default class Admin extends Component {
+  // componentDidMount() {
+  //   this.props.fetchOrders()
+  // }
+  render() {
+    return (
+      <div>
+        <h3>Welcome Admin</h3>
+        <h3> Add a New Category </h3>
+        <AdminCategoryForm />
 
-  return (
-    <div>
-      <h3>Welcome Admin {email}</h3>
-    </div>
-  )
-}
+        <h3> Add a New Product </h3>
+        <AdminProductForm />
 
-/**
- * CONTAINER
- */
-const mapState = state => {
-  return {
-    email: state.user.email
-    // user: state.user.firstName
+        <h3> My Orders: </h3>
+      </div>
+    )
   }
 }
 
-export default connect(mapState)(UserHome)
+// const mapStateToProps = state => {
+//   return {
+//     user: state.user
+//   }
+// }
 
-/**
- * PROP TYPES
- */
-UserHome.propTypes = {
-  email: PropTypes.string
-}
+// const mapDispatchToProps = dispatch => ({})
+
+// export default connect(mapStateToProps)(Admin)

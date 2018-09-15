@@ -9,7 +9,8 @@ import {
   AllProducts,
   SingleProduct,
   Cart,
-  BuyingForm
+  BuyingForm,
+  Admin
 } from './components'
 import Categories from './components/categories'
 import {me} from './store'
@@ -23,7 +24,7 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn} = this.props
+    const {isLoggedIn, isLoggedInAdmin} = this.props
 
     return (
       <Switch>
@@ -48,6 +49,19 @@ class Routes extends Component {
             />
           </Switch>
         )}
+
+        {isLoggedInAdmin && (
+          <Switch>
+            {/* Routes placed here are only available after logging in */}
+            <Route exact path="/admin/home" component={Admin} />
+            <Route path="/products/:productId" component={SingleProduct} />
+            <Route
+              exact
+              path="/category/:categoryName"
+              component={Categories}
+            />
+          </Switch>
+        )}
         {/* Displays our Login component as a fallback */}
 
         <Route component={Login} />
@@ -63,7 +77,8 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id && !state.user.admin,
+    isLoggedInAdmin: !!state.user.admin
   }
 }
 
@@ -84,5 +99,6 @@ export default withRouter(connect(mapState, mapDispatch)(Routes))
  */
 Routes.propTypes = {
   loadInitialData: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired,
+  isLoggedInAdmin: PropTypes.bool.isRequired
 }
