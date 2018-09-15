@@ -10,18 +10,13 @@ import {
 } from '../store/cart'
 
 class Cart extends Component {
-  constructor() {
-    super()
-    this.state = {
-      // quantity: this.props.item.quantity,
-    }
-  }
   componentDidMount() {
     this.props.fetchCart()
   }
   render() {
-    console.log('Whats in my cart?', this.props.cart)
-    return 'Hi'
+    console.log('props', this.props)
+    console.log('state', this.state)
+    return console.log('what is this?', JSON.parse(this.state))
     // <div>
     //   <h3>Shopping Cart HELLO</h3>
     // <ul>
@@ -33,14 +28,14 @@ class Cart extends Component {
     //       <td>{item.price}</td>
     //       <td>{item.quantity}</td>
     //       <div>
-    //         <button type="button" onClick={() => this.setState(this.state.quantity++)}>
-    //           +
+    //         <button type="button" onClick={() => this.props.addToCart(item)}>
+    //           add
     //         </button>
     //         <button
     //           type="button"
-    //           onClick={() => this.setState(this.state.quantity--)}
+    //           onClick={() => this.props.decrementQuantity(item)}
     //         >
-    //           -
+    //           remove
     //         </button>
     //         <button
     //           type="button"
