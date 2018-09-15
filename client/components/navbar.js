@@ -7,7 +7,7 @@ import {logout} from '../store'
 const categoryArr = ['Men', 'Women']
 
 const Navbar = props => {
-  const {handleClick, isLoggedIn} = props
+  const {handleClick, isLoggedIn, isLoggedInAdmin} = props
   return (
     <div>
       <Link to="/">
@@ -21,10 +21,18 @@ const Navbar = props => {
             </Link>
           )
         })}
-        {isLoggedIn ? (
+        {isLoggedIn && !isLoggedInAdmin ? (
           <div>
             {/* The navbar will show these links after you log in */}
             <Link to="/home">My Account</Link>
+            <a href="#" onClick={handleClick}>
+              Logout
+            </a>
+          </div>
+        ) : isLoggedInAdmin ? (
+          <div>
+            {/* The navbar will show these links after you log in */}
+            <Link to="/admin/home">My Admin Account</Link>
             <a href="#" onClick={handleClick}>
               Logout
             </a>
@@ -47,7 +55,8 @@ const Navbar = props => {
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id && !state.user.admin,
+    isLoggedInAdmin: !!state.user.admin
   }
 }
 
@@ -66,5 +75,6 @@ export default withRouter(connect(mapState, mapDispatch)(Navbar))
  */
 Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired,
+  isLoggedInAdmin: PropTypes.bool.isRequired
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {Navbar, Homepage} from './components'
+import {Navbar, AllProducts} from './components'
 import Routes from './routes'
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
 
