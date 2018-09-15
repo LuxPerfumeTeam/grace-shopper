@@ -5,34 +5,20 @@ import {withRouter} from 'react-router-dom'
 import {fetchCart, postToCart, removeFromCart} from '../store/cart'
 
 class SingleProduct extends Component {
-  constructor() {
-    super()
-    this.addToCart = this.addToCart.bind(this)
-    this.removeFromCart = this.removeFromCart.bind(this)
-  }
   componentDidMount() {
     const productId = Number(this.props.match.params.productId)
     this.props.fetchSingleProduct(productId)
   }
 
-  addToCart(selectedProduct) {
-    this.props.postToCart({
-      orderProductsId: 6,
-      name: selectedProduct.name,
-      quantity: 1,
-      userOrderId: 1
-    })
-  }
-
-  removeFromCart(selectedProduct) {
-    this.props.removeFromCart({id: selectedProduct.id, userOrderId: 1})
-  }
   render() {
     const selectedProduct = this.props.selectedPerfume[0] || {}
 
     return (
       <div>
-        <button type="submit" onClick={() => this.addToCart(selectedProduct)}>
+        <button
+          type="submit"
+          onClick={() => this.props.postToCart(selectedProduct.id)}
+        >
           Add to Cart
         </button>
         <button

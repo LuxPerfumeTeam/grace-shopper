@@ -49,9 +49,11 @@ function clearCart() {
 }
 
 //THUNK
-export const postToCart = product => {
+export const postToCart = id => {
+  const storage = window.localStorage
+
   return async dispatch => {
-    const response = await axios.post('/api/cart', product)
+    const response = await axios.get(`/api/products/${id}`)
     const newProduct = response.data
     const action = addToCart(newProduct)
     dispatch(action)
@@ -96,8 +98,16 @@ export const clearAll = () => {
 
 export default function(state = cart, action) {
   switch (action.type) {
-    case ADD_TO_CART:
-      return [...state, action.product]
+    case ADD_TO_CART: {
+      console.log('action', action.product[0].id)
+      if (!state.hasOwnProperty(action.product[0])) {
+        return [...state, {[action.product[0].id]: 1}]
+      } else {
+        const previousQuantity = state[action.product[0].id]
+        console.log('in else')
+        return [...state, {[action.product[0].id]: previousQuantity + 1}]
+      }
+    }
     case GET_CART:
       return action.cart
     case DECREMENT_QUANTITY:
