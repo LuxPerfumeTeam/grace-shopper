@@ -4,10 +4,11 @@
  * having to figure out which file they belong to!
  */
 export {default as Navbar} from './navbar'
-export {default as Homepage} from './homepage'
+// export {default as Homepage} from './homepage'
 export {default as UserHome} from './user-home'
 export {Login, Signup} from './auth-form'
 export {default as AllProducts} from './allProducts'
 export {default as SingleProduct} from './singleProducts'
 export {default as Cart} from './cart'
 export {default as BuyingForm} from './buyingForm'
+export {default as Admin} from './admin'
