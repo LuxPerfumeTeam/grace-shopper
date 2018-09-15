@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {fetchSingleProduct} from '../store/singleproduct'
-import {withRouter} from 'react-router-dom'
-import {fetchCart, postToCart, removeFromCart} from '../store/cart'
+import {withRouter, Link} from 'react-router-dom'
+import {fetchAddToCart} from '../store/cart'
 
 class SingleProduct extends Component {
   componentDidMount() {
@@ -11,26 +11,25 @@ class SingleProduct extends Component {
   }
 
   render() {
-    const selectedProduct = this.props.selectedPerfume[0] || {}
+    const selectedProduct = this.props.selectedPerfume
 
     return (
       <div>
-        <button
-          type="submit"
-          onClick={() => this.props.postToCart(selectedProduct.id)}
-        >
-          Add to Cart
-        </button>
-        <button
-          type="reset"
-          onClick={() => this.removeFromCart(selectedProduct)}
-        >
-          Remove From Cart
-        </button>
+        <Link to="/cart">
+          <button
+            type="submit"
+            onClick={() => {
+              this.props.fetchAddToCart(selectedProduct)
+            }}
+          >
+            Add to Cart
+          </button>
+        </Link>
         <li key={selectedProduct.id}>
           <h2> {selectedProduct.name}</h2>
           <img src={'/' + selectedProduct.image} />
           {selectedProduct.description}
+          {selectedProduct.review}
         </li>
       </div>
     )
@@ -40,9 +39,7 @@ class SingleProduct extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     fetchSingleProduct: id => dispatch(fetchSingleProduct(id)),
-    fetchCart: id => dispatch(fetchCart(id)),
-    postToCart: id => dispatch(postToCart(id)),
-    removeFromCart: id => dispatch(removeFromCart(id))
+    fetchAddToCart: product => dispatch(fetchAddToCart(product))
   }
 }
 const mapStateToProps = state => {

@@ -1,18 +1,16 @@
-import axios from 'axios'
-
 //ACTION TYPES
 
 const ADD_TO_CART = 'ADD_TO_CART'
 const GET_CART = 'GET_CART'
-const DECREMENT_QUANTITY = 'DECREMENT_QUANTITY'
-//delete one Chanel No. 5
 const DELETE_PRODUCT = 'DELETE_PRODUCT'
-//delete all Chanel No. 5
 const CLEAR_CART = 'CLEAR_CART'
 //empty cart
 
 //INITIAL STATE
-const cart = []
+const cart = {
+  items: [],
+  total: 0
+}
 
 //ACTION CREATORS
 function addToCart(product) {
@@ -21,17 +19,10 @@ function addToCart(product) {
     product
   }
 }
-function getCart(cart) {
+function getCart(items) {
   return {
     type: GET_CART,
-    cart
-  }
-}
-
-function decrementQuantity(product) {
-  return {
-    type: DECREMENT_QUANTITY,
-    product
+    items
   }
 }
 
@@ -49,79 +40,50 @@ function clearCart() {
 }
 
 //THUNK
-export const postToCart = id => {
-  const storage = window.localStorage
-
-  return async dispatch => {
-    const response = await axios.get(`/api/products/${id}`)
-    const newProduct = response.data
-    const action = addToCart(newProduct)
+export const fetchAddToCart = product => {
+  return dispatch => {
+    localStorage.setItem('product', JSON.stringify(product))
+    const addedProduct = JSON.parse(localStorage.getItem('product'))
+    const action = addToCart(addedProduct)
     dispatch(action)
   }
 }
 
 export const fetchCart = () => {
-  return async dispatch => {
-    const response = await axios.get('/api/cart')
-    const items = response.data
+  return dispatch => {
+    const arrayOfItems = Object.keys(localStorage)
+    const items = JSON.parse(localStorage.getItem('product'))
+    console.log('what is this?', JSON.parse(localStorage.getItem('product')))
     const action = getCart(items)
     dispatch(action)
   }
 }
 
-export const fetchDecrementQuantity = product => {
-  return async dispatch => {
-    const response = await axios.delete(`/api/cart/${product.id}`)
-    const removed = response.data
-    const action = decrementQuantity(removed)
-    dispatch(action)
-  }
-}
-
-export const deleteProduct = product => {
-  return async dispatch => {
-    const response = await axios.delete(`/api/cart/${product.id}`)
-    const removed = response.data
-    const action = deleteProduct(removed)
+export const fetchDeleteProduct = id => {
+  return dispatch => {
+    const items = JSON.parse(localStorage.getItem('product'))
+    console.log('what is cart list?', cartList)
+    const deleted = JSON.parse(localStorage.removeItem('product'))
+    const action = deleteProduct(deleted)
     dispatch(action)
   }
 }
 
 export const clearAll = () => {
-  return async dispatch => {
-    const response = await axios.delete(`/api/cart/`)
-    const removed = response.data
-    const action = clearCart()
-    dispatch(action)
+  return dispatch => {
+    localStorage.clear()
+    dispatch(clearCart())
   }
 }
 
 export default function(state = cart, action) {
   switch (action.type) {
-    case ADD_TO_CART: {
-      console.log('action', action.product[0].id)
-      if (!state.hasOwnProperty(action.product[0])) {
-        return [...state, {[action.product[0].id]: 1}]
-      } else {
-        const previousQuantity = state[action.product[0].id]
-        console.log('in else')
-        return [...state, {[action.product[0].id]: previousQuantity + 1}]
-      }
-    }
-    case GET_CART:
-      return action.cart
-    case DECREMENT_QUANTITY:
-      let indPr = state.findIndex(prod => prod.id === action.product.id)
-      let currState = state
-      if (state[indPr].quantity > 1) {
-        currState[indPr].quantity -= 1
-      } else currState.splice(indPr, 1)
-      return currState
+    case ADD_TO_CART:
+      return {...state, items: [...state.items, action.product]}
+    // case GET_CART:
+    //   return [...state.itemsaction.items
     case DELETE_PRODUCT:
-      return [
-        ...state,
-        {product: state.filter(product => product.id !== action.product.id)}
-      ]
+      return action.product
     case CLEAR_CART:
       return cart
     default:

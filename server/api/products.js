@@ -54,11 +54,7 @@ router.get('/category', async (req, res, next) => {
 // }
 router.get('/:productId', async (req, res, next) => {
   try {
-    const product = await Product.findAll({
-      where: {
-        id: req.params.productId
-      }
-    })
+    const product = await Product.findById(req.params.productId)
     res.json(product)
   } catch (err) {
     console.log('error with express route to get single perfume')

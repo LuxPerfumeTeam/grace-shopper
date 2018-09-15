@@ -1,64 +1,69 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'react-router-dom'
-import {
-  fetchCart,
-  postToCart,
-  decrementQuantity,
-  deleteProduct,
-  clearAll
-} from '../store/cart'
+import {withRouter, Link} from 'react-router-dom'
+import {fetchCart, fetchDeleteProduct, clearAll} from '../store/cart'
 
 class Cart extends Component {
+  constructor() {
+    super()
+    this.state = {
+      quantity: 1
+    }
+  }
   componentDidMount() {
     this.props.fetchCart()
   }
   render() {
-    console.log('props', this.props)
-    console.log('state', this.state)
-    return console.log('what is this?', JSON.parse(this.state))
-    // <div>
-    //   <h3>Shopping Cart HELLO</h3>
-    // <ul>
+    const items = this.props.cart.items
+    console.log('HELLO props', this.props.cart)
+    console.log('HELLO localStorage', localStorage.getItem('cartList'))
+    return (
+      <div>
+        <h3>Shopping Cart HELLO</h3>
+        <ul>
+          {items.length &&
+            items.map(item => (
+              <div key={item.id}>
+                <li>
+                  <Link to={`/products/${item.id}`}>Name: {item.name}</Link>
+                </li>
+                <li>
+                  <img src={item.image} />
+                </li>
+                <li>Price: {item.price}</li>
 
-    // {this.props.cart.length &&
-    //   this.props.cart.map(item => (
-    //     <li key={item.id}>
-    //       <Link to={`/products/${item.id}`}>{item.name}</Link>
-    //       <td>{item.price}</td>
-    //       <td>{item.quantity}</td>
-    //       <div>
-    //         <button type="button" onClick={() => this.props.addToCart(item)}>
-    //           add
-    //         </button>
-    //         <button
-    //           type="button"
-    //           onClick={() => this.props.decrementQuantity(item)}
-    //         >
-    //           remove
-    //         </button>
-    //         <button
-    //           type="button"
-    //           onClick={() => this.props.deleteProduct(item)}
-    //         >
-    //           delete
-    //         </button>
-    //       </div>
-    //     </li>
-    //   ))}
-    // </ul>
-    //   <button type="button" onClick={() => this.props.clearCart()}>
-    //     clearCart
-    //   </button>
-    // </div>
+                <div>
+                  <button type="button" onClick={() => item.quantity++}>
+                    +
+                  </button>
+                  <li>{item.quantity}</li>
+                  <button type="button" onClick={() => item.quantity--}>
+                    -
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      this.props.fetchDeleteProduct(item.id)
+                      this.props.history.push('/cart')
+                    }}
+                  >
+                    remove
+                  </button>
+                </div>
+              </div>
+            ))}
+        </ul>
+        <button type="button" onClick={() => this.props.clearCart()}>
+          clearCart
+        </button>
+      </div>
+    )
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
     fetchCart: () => dispatch(fetchCart()),
-    addToCart: product => dispatch(addToCart(product)),
-    decrementQuantity: product => dispatch(decrementQuantity(product)),
-    deleteProduct: product => dispatch(deleteProduct(product)),
+    fetchDeleteProduct: id => dispatch(fetchDeleteProduct(id)),
     clearCart: () => dispatch(clearAll())
   }
 }
