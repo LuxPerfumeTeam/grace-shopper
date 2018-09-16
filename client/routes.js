@@ -42,6 +42,8 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/home" component={UserHome} />
             <Route path="/products/:productId" component={SingleProduct} />
+            <Route path="/BuyingForm" component={BuyingForm} />
+            <Route exact path="/" component={AllProducts} />
             <Route
               exact
               path="/category/:categoryName"
@@ -55,6 +57,8 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/admin/home" component={Admin} />
             <Route path="/products/:productId" component={SingleProduct} />
+            <Route path="/BuyingForm" component={BuyingForm} />
+            <Route exact path="/" component={AllProducts} />
             <Route
               exact
               path="/category/:categoryName"

@@ -21,6 +21,9 @@ const Navbar = props => {
             </Link>
           )
         })}
+        <Link to="/">
+          <p>All Products</p>
+        </Link>
         {isLoggedIn && !isLoggedInAdmin ? (
           <div>
             {/* The navbar will show these links after you log in */}
