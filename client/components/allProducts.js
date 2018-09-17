@@ -71,7 +71,7 @@ const mapStateToProps = function(state) {
 const mapDispatchToProps = function(dispatch) {
   return {
     fetchProducts: () => dispatch(fetchProducts()),
-    fetchAddToCart: id => dispatch(fetchAddToCart(id))
+    fetchAddToCart: product => dispatch(fetchAddToCart(product))
   }
 }
 export default withRouter(

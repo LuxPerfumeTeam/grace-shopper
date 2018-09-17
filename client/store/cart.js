@@ -71,7 +71,9 @@ export const clearAll = () => {
 export default function(state = cart, action) {
   switch (action.type) {
     case ADD_TO_CART:
-      return {...state, items: [...state.items, action.product]}
+      console.log('STATE ?? =>', state, 'Action.Product => ', action.product)
+      state.items = [...state.items, action.product]
+      return state
     case GET_CART:
       return action.items
     case CLEAR_CART:

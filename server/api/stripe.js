@@ -6,11 +6,13 @@ var stripe = require('stripe')('sk_test_6uatd7ZABDvXkMp8d4ODbC63')
 // Token is created using Checkout or Elements!
 // Get the payment token ID submitted by the form:
 
-router.post('/payment', (req, res, next) => {
+router.post('/payment', async (req, res, next) => {
   try {
     const token = req.body.stripeToken // Using Express
-
-    const charge = stripe.charges.create({
+    //did my stripe order complete?
+    //Yes ? post to db order order = await Order.create({req.body.order})
+    //then, res.send({status: 'order sent', order: order})
+    const charge = await stripe.charges.create({
       amount: 999,
       currency: 'usd',
       description: 'Example charge',
