@@ -37,7 +37,7 @@ export default class Cards extends Component {
         token: token => {
           this.setState({loading: true})
           // use fetch or some other AJAX library here if you dont want to use axios
-          axios.post('/api/stripe', {
+          axios.post('/api/payment', {
             stripeToken: token.id
           })
         }
@@ -61,7 +61,7 @@ export default class Cards extends Component {
     this.stripeHandler.open({
       name: 'test',
       description: 'widget',
-      panelLabel: 'Update Credit Card',
+      panelLabel: 'Pay Total',
       allowRememberMe: false
     })
     e.preventDefault()
@@ -72,10 +72,10 @@ export default class Cards extends Component {
     return (
       <div>
         {loading || stripeLoading ? (
-          <p>loading..</p>
+          <p>finished!</p>
         ) : (
           <button type="button" onClick={this.onStripeUpdate}>
-            Add Credit Card
+            Pay Total
           </button>
         )}
       </div>

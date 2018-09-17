@@ -1,5 +1,8 @@
 import React, {Component} from 'react'
 import Stripe from './stripe'
+import {clearAll} from '../store/cart'
+import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom'
 
 function validate(firstName, lastName, address, city, state, zipcode) {
   const errors = []
@@ -25,7 +28,7 @@ function validate(firstName, lastName, address, city, state, zipcode) {
   return errors
 }
 
-export default class BuyingForm extends Component {
+class BuyingForm extends Component {
   constructor() {
     super()
     this.state = {
@@ -67,7 +70,8 @@ export default class BuyingForm extends Component {
       this.setState({errors})
     } else {
       // this.props.addStudent(this.state)
-      // this.props.history.push('/homepage')
+      this.props.clearCart()
+      this.props.history.push('/')
     }
   }
 
@@ -176,10 +180,19 @@ export default class BuyingForm extends Component {
           </div>
         </div>
         <Stripe />
+
         <button color="primary" size="lg" type="submit">
-          Pay with Card
+          Complete Payment
         </button>
       </form>
     )
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    clearCart: () => dispatch(clearAll())
+  }
+}
+
+module.exports = withRouter(connect(null, mapDispatchToProps)(BuyingForm))

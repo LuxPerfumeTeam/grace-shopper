@@ -50,11 +50,11 @@ export const fetchCart = () => {
     const uniqueArrId = arrOfId.filter(function(item, pos, self) {
       return self.indexOf(item) === pos
     })
+    console.log(arrOfId)
     const arrOfProducts = uniqueArrId.map(each => {
       let value = localStorage[each]
       return JSON.parse(value)
     })
-    console.log('what is this?', arrOfProducts)
 
     const action = getCart(arrOfProducts)
     dispatch(action)

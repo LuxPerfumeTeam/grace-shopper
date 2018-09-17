@@ -7,9 +7,7 @@ import axios from 'axios'
 class Cart extends Component {
   constructor() {
     super()
-    this.state = {
-      quantity: 1
-    }
+
     this.refresh = this.refresh.bind(this)
   }
   componentDidMount() {
@@ -22,6 +20,7 @@ class Cart extends Component {
   render() {
     const items = this.props.cart
     console.log(items)
+    if (localStorage.length === 0) return <h1> No Items In Cart</h1>
     return (
       <div>
         <h3>Cart</h3>
