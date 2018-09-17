@@ -23,6 +23,10 @@ const Product = db.define('product', {
   image: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  quantity: {
+    type: Sequelize.INTEGER,
+    defaultValue: 1
   }
 })
 

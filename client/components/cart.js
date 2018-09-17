@@ -1,64 +1,89 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'react-router-dom'
-import {
-  fetchCart,
-  postToCart,
-  decrementQuantity,
-  deleteProduct,
-  clearAll
-} from '../store/cart'
+import {withRouter, Link} from 'react-router-dom'
+import {fetchCart, clearAll} from '../store/cart'
+import axios from 'axios'
 
 class Cart extends Component {
+  constructor() {
+    super()
+
+    this.refresh = this.refresh.bind(this)
+  }
   componentDidMount() {
     this.props.fetchCart()
   }
-  render() {
-    console.log('props', this.props)
-    console.log('state', this.state)
-    return 'Hi'
-    // <div>
-    //   <h3>Shopping Cart HELLO</h3>
-    // <ul>
+  refresh() {
+    location.reload()
+  }
 
-    // {this.props.cart.length &&
-    //   this.props.cart.map(item => (
-    //     <li key={item.id}>
-    //       <Link to={`/products/${item.id}`}>{item.name}</Link>
-    //       <td>{item.price}</td>
-    //       <td>{item.quantity}</td>
-    //       <div>
-    //         <button type="button" onClick={() => this.props.addToCart(item)}>
-    //           add
-    //         </button>
-    //         <button
-    //           type="button"
-    //           onClick={() => this.props.decrementQuantity(item)}
-    //         >
-    //           remove
-    //         </button>
-    //         <button
-    //           type="button"
-    //           onClick={() => this.props.deleteProduct(item)}
-    //         >
-    //           delete
-    //         </button>
-    //       </div>
-    //     </li>
-    //   ))}
-    // </ul>
-    //   <button type="button" onClick={() => this.props.clearCart()}>
-    //     clearCart
-    //   </button>
-    // </div>
+  render() {
+    const items = this.props.cart
+
+    console.log(items)
+    if (localStorage.length === 0) return <h1> No Items In Cart</h1>
+    return (
+      <div>
+        <h3>Cart</h3>
+        <ul>
+          {items.length &&
+            items.map(item => (
+              <div key={item.id}>
+                <li>
+                  <Link to={`/products/${item.id}`}>Name: {item.name}</Link>
+                </li>
+                <li>
+                  <img src={item.image} />
+                </li>
+                <li>Price: {item.price}</li>
+
+                <div>
+                  <button type="button" onClick={() => item.quantity++}>
+                    +
+                  </button>
+                  <li>{item.quantity}</li>
+                  <button type="button" onClick={() => item.quantity--}>
+                    -
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      localStorage.removeItem(`${item.id}`)
+                      this.refresh()
+                    }}
+                  >
+                    remove
+                  </button>
+                </div>
+              </div>
+            ))}
+        </ul>
+
+        <button type="button" onClick={() => this.props.clearCart()}>
+          clearCart
+        </button>
+        <div>
+          Total:
+          {items.length &&
+            items
+              .map(each => each.price * each.quantity)
+              .reduce((a, b) => a + b)}
+        </div>
+        <button
+          type="button"
+          onClick={async () => {
+            await axios.post('api/order', items)
+          }}
+        >
+          <Link to="/buyingForm">Checkout</Link>
+        </button>
+      </div>
+    )
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
     fetchCart: () => dispatch(fetchCart()),
-    addToCart: product => dispatch(addToCart(product)),
-    decrementQuantity: product => dispatch(decrementQuantity(product)),
-    deleteProduct: product => dispatch(deleteProduct(product)),
     clearCart: () => dispatch(clearAll())
   }
 }

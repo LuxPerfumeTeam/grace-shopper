@@ -1,18 +1,16 @@
-import axios from 'axios'
-
 //ACTION TYPES
 
 const ADD_TO_CART = 'ADD_TO_CART'
 const GET_CART = 'GET_CART'
-const DECREMENT_QUANTITY = 'DECREMENT_QUANTITY'
-//delete one Chanel No. 5
-const DELETE_PRODUCT = 'DELETE_PRODUCT'
-//delete all Chanel No. 5
 const CLEAR_CART = 'CLEAR_CART'
+
 //empty cart
 
 //INITIAL STATE
-const cart = []
+const cart = {
+  items: []
+  // total: 0
+}
 
 //ACTION CREATORS
 function addToCart(product) {
@@ -21,24 +19,10 @@ function addToCart(product) {
     product
   }
 }
-function getCart(cart) {
+function getCart(items) {
   return {
     type: GET_CART,
-    cart
-  }
-}
-
-function decrementQuantity(product) {
-  return {
-    type: DECREMENT_QUANTITY,
-    product
-  }
-}
-
-function deleteProduct(product) {
-  return {
-    type: DELETE_PRODUCT,
-    product
+    items
   }
 }
 
@@ -49,79 +33,51 @@ function clearCart() {
 }
 
 //THUNK
-export const postToCart = id => {
-  const storage = window.localStorage
+export const fetchAddToCart = product => {
+  return dispatch => {
+    const id = product.id
+    if (typeof Number(id) === 'number') {
+      localStorage.setItem(`${id}`, JSON.stringify(product))
+      const addedProduct = JSON.parse(localStorage.getItem(`${id}`))
 
-  return async dispatch => {
-    const response = await axios.get(`/api/products/${id}`)
-    const newProduct = response.data
-    const action = addToCart(newProduct)
-    dispatch(action)
+      const action = addToCart(addedProduct)
+      dispatch(action)
+    }
   }
 }
 
 export const fetchCart = () => {
-  return async dispatch => {
-    const response = await axios.get('/api/cart')
-    const items = response.data
-    const action = getCart(items)
-    dispatch(action)
-  }
-}
+  return dispatch => {
+    const arrOfId = Object.keys(localStorage)
+    const uniqueArrId = arrOfId.filter(function(item, pos, self) {
+      return self.indexOf(item) === pos
+    })
+    console.log(arrOfId)
+    const arrOfProducts = uniqueArrId.map(each => {
+      let value = localStorage[each]
+      return JSON.parse(value)
+    })
 
-export const decrementQuantity = product => {
-  return async dispatch => {
-    const response = await axios.delete(`/api/cart/${product.id}`)
-    const removed = response.data
-    const action = decrementQuantity(removed)
-    dispatch(action)
-  }
-}
-
-export const deleteProduct = product => {
-  return async dispatch => {
-    const response = await axios.delete(`/api/cart/${product.id}`)
-    const removed = response.data
-    const action = deleteProduct(removed)
+    const action = getCart(arrOfProducts)
     dispatch(action)
   }
 }
 
 export const clearAll = () => {
-  return async dispatch => {
-    const response = await axios.delete(`/api/cart/`)
-    const removed = response.data
-    const action = clearCart()
-    dispatch(action)
+  return dispatch => {
+    localStorage.clear()
+    dispatch(clearCart())
   }
 }
 
 export default function(state = cart, action) {
   switch (action.type) {
-    case ADD_TO_CART: {
-      console.log('action', action.product[0].id)
-      if (!state.hasOwnProperty(action.product[0])) {
-        return [...state, {[action.product[0].id]: 1}]
-      } else {
-        const previousQuantity = state[action.product[0].id]
-        console.log('in else')
-        return [...state, {[action.product[0].id]: previousQuantity + 1}]
-      }
-    }
-    case GET_CART:
+    case ADD_TO_CART:
+      console.log('STATE ?? =>', state, 'Action.Product => ', action.product)
+      state.items = [...state.items, action.product]
       return state
-    case DECREMENT_QUANTITY:
-      let indPr = state.findIndex(prod => prod.id === action.product.id)
-      let currState = state
-      if (state[indPr].quantity > 1) {
-        currState[indPr].quantity -= 1
-      } else currState.splice(indPr, 1)
-      return currState
-    case DELETE_PRODUCT:
-      return [
-        ...state,
-        {product: state.filter(product => product.id !== action.product.id)}
-      ]
+    case GET_CART:
+      return action.items
     case CLEAR_CART:
       return cart
     default:
