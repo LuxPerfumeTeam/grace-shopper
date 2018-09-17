@@ -48,25 +48,6 @@ const Navbar = props => {
                 <Link to="/signup">Sign Up</Link>
               </div>
             )}
-            <li>
-              <a href="sass.html">Man</a>
-            </li>
-            <li>
-              <a href="badges.html">Woman</a>
-            </li>
-          </ul>
-          <ul className="right hide-on-med-and-down">
-            <li>
-              <Link to="/cart">
-                <i className="material-icons">add_shopping_cart</i>
-              </Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/signup">Sign Up</Link>
-            </li>
           </ul>
         </div>
       </nav>
