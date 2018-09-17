@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import Stripe from './stripe'
 
 function validate(firstName, lastName, address, city, state, zipcode) {
   const errors = []
@@ -78,17 +79,6 @@ export default class BuyingForm extends Component {
     const {errors} = this.state
     return (
       <form onSubmit={this.handleSubmit}>
-        <script
-          src="https://checkout.stripe.com/checkout.js"
-          className="stripe-button"
-          data-key="pk_test_TYooMQauvdEDq54NiTphI7jx"
-          data-amount="999"
-          data-name="Stripe.com"
-          data-description="Widget"
-          data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-          data-locale="auto"
-          data-zip-code="true"
-        />
         {errors.map(error => <p key={error}>Error: {error}</p>)}
         <div>
           <label>First Name</label>
@@ -185,7 +175,7 @@ export default class BuyingForm extends Component {
             />
           </div>
         </div>
-
+        <Stripe />
         <button color="primary" size="lg" type="submit">
           Pay with Card
         </button>
