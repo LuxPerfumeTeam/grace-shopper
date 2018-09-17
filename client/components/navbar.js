@@ -9,48 +9,51 @@ const categoryArr = ['Men', 'Women']
 const Navbar = props => {
   const {handleClick, isLoggedIn, isLoggedInAdmin} = props
   return (
-    <div className="navbar-fixed">
+    <div>
+      <Link to="/">
+        <h1>LuxPerfume</h1>
+      </Link>
+
       <nav>
-        <div className="nav-wrapper">
-          <Link to="/" className="brand-logo center">
-            LuxPerfume
-          </Link>
-          <ul className="left hide-on-med-and-down">
-            {categoryArr.map(each => {
-              return (
-                <li>
-                  <Link key={each} to={`/category/${each}`}>
-                    {each}
-                  </Link>
-                </li>
-              )
-            })}
-            {isLoggedIn && !isLoggedInAdmin ? (
-              <div>
-                {/* The navbar will show these links after you log in */}
-                <Link to="/home">My Account</Link>
-                <a href="#" onClick={handleClick}>
-                  Logout
-                </a>
-              </div>
-            ) : isLoggedInAdmin ? (
-              <div>
-                {/* The navbar will show these links after you log in */}
-                <Link to="/admin/home">My Admin Account</Link>
-                <a href="#" onClick={handleClick}>
-                  Logout
-                </a>
-              </div>
-            ) : (
-              <div>
-                {/* The navbar will show these links before you log in */}
-                <Link to="/login">Login</Link>
-                <Link to="/signup">Sign Up</Link>
-              </div>
-            )}
-          </ul>
-        </div>
+        {categoryArr.map(each => {
+          return (
+            <Link key={each} to={`/category/${each}`}>
+              {each}
+            </Link>
+          )
+        })}
+        <Link to="/">
+          {/* FIX THIS */}
+          <p>All Products</p>
+        </Link>
+        {isLoggedIn && !isLoggedInAdmin ? (
+          <div>
+            {/* The navbar will show these links after you log in */}
+            <Link to="/home">My Account</Link>
+            <a href="#" onClick={handleClick}>
+              Logout
+            </a>
+          </div>
+        ) : isLoggedInAdmin ? (
+          <div>
+            {/* The navbar will show these links after you log in */}
+            <Link to="/admin/home">My Admin Account</Link>
+            <Link to="/admin/addproduct">Add/Edit Products</Link>
+            <Link to="/admin/addcategory">Add/Edit Categories</Link>
+            <Link to="/admin/orders">Orders</Link>
+            <a href="#" onClick={handleClick}>
+              Logout
+            </a>
+          </div>
+        ) : (
+          <div>
+            {/* The navbar will show these links before you log in */}
+            <Link to="/login">Login</Link>
+            <Link to="/signup">Sign Up</Link>
+          </div>
+        )}
       </nav>
+      <hr />
     </div>
   )
 }
