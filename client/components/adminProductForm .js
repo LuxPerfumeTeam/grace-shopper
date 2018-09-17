@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {addNewProduct} from '../store/product'
-import {fetchProducts} from '../store/product'
-import {deleteAProduct} from '../store/product'
+import {fetchProducts, deleteAProduct, addNewProduct} from '../store/product'
 
 class AdminProductForm extends Component {
   constructor() {
@@ -17,6 +15,7 @@ class AdminProductForm extends Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.delete = this.delete.bind(this)
   }
 
   handleChange(evt) {
@@ -34,10 +33,16 @@ class AdminProductForm extends Component {
       categoryId: '',
       image: ''
     })
+    this.props.history.push('/admin/addproduct')
   }
 
   componentDidMount() {
     this.props.fetchProducts()
+  }
+
+  delete(id) {
+    this.props.deleteAProduct(id)
+    this.props.history.push('/admin/addproduct')
   }
 
   render() {
@@ -136,7 +141,7 @@ class AdminProductForm extends Component {
                     <button type="submit">Edit</button>
                     <button
                       type="submit"
-                      onClick={() => deleteAProduct(product.id)}
+                      onClick={() => this.delete(product.id)}
                     >
                       Delete
                     </button>

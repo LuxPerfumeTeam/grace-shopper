@@ -78,6 +78,7 @@ router.get('/', async (req, res, next) => {
     const products = await Product.findAll({
       include: [{model: Review}]
     })
+    res.json(products)
   } catch (err) {
     console.log('error with express route to get all perfume')
     next(err)
