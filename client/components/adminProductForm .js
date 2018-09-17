@@ -11,9 +11,9 @@ class AdminProductForm extends Component {
       name: '',
       description: '',
       price: '',
-      inventory: ''
-      // categoryId: '',
-      // image: ''
+      inventory: '',
+      categoryId: '',
+      image: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -30,9 +30,9 @@ class AdminProductForm extends Component {
       name: '',
       description: '',
       price: '',
-      inventory: ''
-      // categoryId: '',
-      // image: ''
+      inventory: '',
+      categoryId: '',
+      image: ''
     })
   }
 
@@ -87,14 +87,13 @@ class AdminProductForm extends Component {
                 placeholder="..."
               />
             </div>
-            {/* <div>
+            <div>
               <label>ImageUrl</label>
               <input
                 name="image"
                 type="text"
                 value={this.state.image}
                 onChange={this.handleChange}
-                placeholder="..."
               />
             </div>
             <div>
@@ -106,7 +105,8 @@ class AdminProductForm extends Component {
                 onChange={this.handleChange}
                 placeholder="1"
               />
-            </div> */}
+            </div>
+
             <button type="submit">Submit</button>
           </div>
         </form>

@@ -23,7 +23,6 @@ const Navbar = props => {
           )
         })}
         <Link to="/">
-          {/* FIX THIS */}
           <p>All Products</p>
         </Link>
       </nav>
