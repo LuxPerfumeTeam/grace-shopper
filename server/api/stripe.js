@@ -18,6 +18,8 @@ router.post('/payment', async (req, res, next) => {
       description: 'Example charge',
       source: token
     })
+    // so Order.create and User.create
+    console.log('charge', charge)
   } catch (err) {
     console.log('You have an error with StripeCard')
     next(err)

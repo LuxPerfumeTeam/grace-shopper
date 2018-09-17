@@ -139,7 +139,6 @@ async function seed() {
 
   return Category.bulkCreate(categories)
     .then(() => Product.bulkCreate(products))
-    .then(() => User.bulkCreate(user))
     .then(() => Review.bulkCreate(reviews))
 }
 
