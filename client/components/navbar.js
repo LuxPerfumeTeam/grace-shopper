@@ -9,9 +9,9 @@ const categoryArr = ['Men', 'Women']
 const Navbar = props => {
   const {handleClick, isLoggedIn, isLoggedInAdmin} = props
   return (
-    <div>
+    <div className="card-panel white">
       <Link to="/">
-        <h1>LuxPerfume</h1>
+        <h1 className="black-text">LuxPerfume</h1>
       </Link>
       <nav>
         {categoryArr.map(each => {

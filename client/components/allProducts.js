@@ -36,7 +36,6 @@ class AllProducts extends Component {
 
   render() {
     const products = this.props.products
-    console.log('TRYING TO SEE', this.props.products)
     return (
       <div>
         <h3>Perfume</h3>
