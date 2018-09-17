@@ -41,24 +41,36 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+// router.post('/', async (req, res, next) => {
+//   try {
+//     console.log('req.body', req.body)
+
+//     const productExist = await Orders.findOne({
+//       where: {
+//         userOrderId: req.body.userOrderId,
+//         orderProductsId: req.body.orderProductsId
+//       }
+//     })
+//     if (productExist.userOrderId) {
+//       let quantity = productExist.quantity + 1
+//       productExist.update({quantity: quantity})
+//     } else {
+//       const product = await Orders.create(req.body)
+
+//       res.json(product)
+//     }
+//   } catch (error) {
+//     console.error(error)
+//   }
+// })
+
 router.post('/', async (req, res, next) => {
   try {
     console.log('req.body', req.body)
+    // for(let i = 0; i < req.body.length; i++){
 
-    const productExist = await Orders.findOne({
-      where: {
-        userOrderId: req.body.userOrderId,
-        orderProductsId: req.body.orderProductsId
-      }
-    })
-    if (productExist.userOrderId) {
-      let quantity = productExist.quantity + 1
-      productExist.update({quantity: quantity})
-    } else {
-      const product = await Orders.create(req.body)
-
-      res.json(product)
-    }
+    // }
+    Orders.create({where: {quantity: req.body.length}})
   } catch (error) {
     console.error(error)
   }

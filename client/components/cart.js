@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
 import {fetchCart, clearAll} from '../store/cart'
+import axios from 'axios'
 
 class Cart extends Component {
   constructor() {
@@ -17,12 +18,13 @@ class Cart extends Component {
   refresh() {
     location.reload()
   }
+
   render() {
     const items = this.props.cart
-    console.log('HELLO props', this.props.cart)
+    console.log(items)
     return (
       <div>
-        <h3>Shopping Cart HELLO</h3>
+        <h3>Cart</h3>
         <ul>
           {items.length &&
             items.map(item => (
@@ -56,8 +58,24 @@ class Cart extends Component {
               </div>
             ))}
         </ul>
+
         <button type="button" onClick={() => this.props.clearCart()}>
           clearCart
+        </button>
+        <div>
+          Total:
+          {items.length &&
+            items
+              .map(each => each.price * each.quantity)
+              .reduce((a, b) => a + b)}
+        </div>
+        <button
+          type="button"
+          onClick={async () => {
+            await axios.post('api/order', items)
+          }}
+        >
+          <Link to="/buyingForm">Checkout</Link>
         </button>
       </div>
     )

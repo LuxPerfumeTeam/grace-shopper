@@ -35,6 +35,7 @@ export default class BuyingForm extends Component {
       state: '',
       zipcode: '',
       phone: '',
+      email: '',
       errors: []
     }
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -77,6 +78,17 @@ export default class BuyingForm extends Component {
     const {errors} = this.state
     return (
       <form onSubmit={this.handleSubmit}>
+        <script
+          src="https://checkout.stripe.com/checkout.js"
+          className="stripe-button"
+          data-key="pk_test_TYooMQauvdEDq54NiTphI7jx"
+          data-amount="999"
+          data-name="Stripe.com"
+          data-description="Widget"
+          data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+          data-locale="auto"
+          data-zip-code="true"
+        />
         {errors.map(error => <p key={error}>Error: {error}</p>)}
         <div>
           <label>First Name</label>
@@ -162,8 +174,20 @@ export default class BuyingForm extends Component {
           </div>
         </div>
 
+        <div>
+          <label>Email</label>
+          <div>
+            <input
+              type="text"
+              name="email"
+              value={this.state.email}
+              onChange={this.handleChange}
+            />
+          </div>
+        </div>
+
         <button color="primary" size="lg" type="submit">
-          Buy
+          Pay with Card
         </button>
       </form>
     )

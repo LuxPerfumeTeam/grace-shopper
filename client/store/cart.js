@@ -2,14 +2,14 @@
 
 const ADD_TO_CART = 'ADD_TO_CART'
 const GET_CART = 'GET_CART'
-const DELETE_PRODUCT = 'DELETE_PRODUCT'
 const CLEAR_CART = 'CLEAR_CART'
+
 //empty cart
 
 //INITIAL STATE
 const cart = {
-  items: [],
-  total: 0
+  items: []
+  // total: 0
 }
 
 //ACTION CREATORS
@@ -26,13 +26,6 @@ function getCart(items) {
   }
 }
 
-function deleteProduct(product) {
-  return {
-    type: DELETE_PRODUCT,
-    product
-  }
-}
-
 function clearCart() {
   return {
     type: CLEAR_CART
@@ -45,6 +38,7 @@ export const fetchAddToCart = product => {
     const id = product.id
     localStorage.setItem(`${id}`, JSON.stringify(product))
     const addedProduct = JSON.parse(localStorage.getItem(`${id}`))
+
     const action = addToCart(addedProduct)
     dispatch(action)
   }
@@ -80,8 +74,6 @@ export default function(state = cart, action) {
       return {...state, items: [...state.items, action.product]}
     case GET_CART:
       return action.items
-    case DELETE_PRODUCT:
-      return action.product
     case CLEAR_CART:
       return cart
     default:
