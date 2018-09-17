@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {fetchProducts} from '../store/product'
 import {withRouter, NavLink} from 'react-router-dom'
 import {Link} from 'react-router-dom'
-import {postToCart} from '../store/cart'
+import {fetchAddToCart} from '../store/cart'
 
 // import Cart from './cart'
 class AllProducts extends Component {
@@ -36,7 +36,6 @@ class AllProducts extends Component {
 
   render() {
     const products = this.props.products
-    console.log('TRYING TO SEE', this.props.products)
     return (
       <div>
         <h3>Perfume</h3>
@@ -47,13 +46,16 @@ class AllProducts extends Component {
               <img src={product.image} />
               {product.name}
             </Link>
-            <button
-              type="submit"
-              value={this.state.product}
-              onClick={() => this.handleChange}
-            >
-              Add to Cart
-            </button>
+            <Link to="/cart">
+              <button
+                type="submit"
+                onClick={() => {
+                  this.props.fetchAddToCart(product)
+                }}
+              >
+                Add to Cart
+              </button>
+            </Link>
           </div>
         ))}
       </div>
@@ -69,7 +71,7 @@ const mapStateToProps = function(state) {
 const mapDispatchToProps = function(dispatch) {
   return {
     fetchProducts: () => dispatch(fetchProducts()),
-    postToCart: id => dispatch(postToCart(id))
+    fetchAddToCart: id => dispatch(fetchAddToCart(id))
   }
 }
 export default withRouter(
