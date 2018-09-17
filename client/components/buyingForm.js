@@ -188,7 +188,7 @@ class BuyingForm extends Component {
     )
   }
 }
-
+//once complete payment, send the info to another thunk that posts to user api route to create a user/ guest(need if else statement for password)
 const mapDispatchToProps = dispatch => {
   return {
     clearCart: () => dispatch(clearAll())

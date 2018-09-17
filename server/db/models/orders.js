@@ -10,7 +10,8 @@ const Orders = db.define('orders', {
     type: Sequelize.INTEGER
   },
   open: {
-    type: Sequelize.BOOLEAN
+    type: Sequelize.BOOLEAN,
+    defaultValue: true
   }
 })
 

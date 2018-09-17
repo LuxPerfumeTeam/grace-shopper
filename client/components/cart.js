@@ -47,7 +47,7 @@ class Cart extends Component {
                   <button
                     type="button"
                     onClick={() => {
-                      localStorage.removeItem(`${item.id}`)
+                      localStorage.removeItem(`${item.id}`) //make thunk creator like the rest to update the delete in the store
                       this.refresh()
                     }}
                   >
@@ -86,7 +86,7 @@ const mapDispatchToProps = dispatch => {
     clearCart: () => dispatch(clearAll())
   }
 }
-
+//thunk creator that does axios.post to api/orders to send the order information
 const mapStateToProps = state => {
   return {
     cart: state.cart
