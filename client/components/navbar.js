@@ -9,10 +9,7 @@ const categoryArr = ['Men', 'Women']
 const Navbar = props => {
   const {handleClick, isLoggedIn, isLoggedInAdmin} = props
   return (
-    <div>
-      <Link to="/">
-        <h1>LuxPerfume</h1>
-      </Link>
+    <div className="navbar-fixed">
       <nav>
         {categoryArr.map(each => {
           return (
@@ -46,7 +43,6 @@ const Navbar = props => {
           </div>
         )}
       </nav>
-      <hr />
     </div>
   )
 }
