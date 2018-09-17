@@ -14,13 +14,13 @@ Product.belongsTo(Category)
 // Orders.belongsToMany(Products, {through: 'orderProducts'})
 // Products.belongsToMany(Orders, {through: 'orderProducts'})
 
-User.belongsToMany(Orders, {through: 'userOrders'})
+// User.belongsToMany(Orders, {through: 'userOrders'})
 //Orders.belongsToMany(Products, {through: 'OrderProducts'})
 
 //FROM YOU GUYS
-// Products.belongsToMany(Orders, {through: 'OrderProducts'})
-// Orders.belongsTo(Products, {as: 'orderProducts'})
-// Orders.belongsTo(User, {as: 'userOrder'})
+Product.belongsToMany(Orders, {through: 'OrderProducts'})
+Orders.belongsTo(Product, {as: 'orderProducts'})
+Orders.belongsTo(User, {as: 'userOrder'})
 
 // Reviews.belongsTo(User)
 // Reviews.belongsTo(Products)

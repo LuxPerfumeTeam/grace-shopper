@@ -12,6 +12,8 @@
 // )
 // app.use(cookieParser())
 const Orders = require('../db/models/orders')
+
+const Product = require('../db/models/product')
 const router = require('express').Router()
 module.exports = router
 
@@ -25,10 +27,12 @@ router.get('/', async (req, res, next) => {
   //upon login: is there an open order? if so, merge with req.session. if not, create it.
   //shop on amazon incognito and nonincognito. then log in - compare carts
   try {
-    const orderId = await Orders.findById(req.id)
+    const order = await Orders.findAll({
+      include: [{model: Product, as: 'orderProducts'}]
+    })
 
-    if (orderId) {
-      res.json(orderId)
+    if (order) {
+      res.json(order)
     } else {
       res.send('The order is empty')
     }
@@ -37,24 +41,36 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+// router.post('/', async (req, res, next) => {
+//   try {
+//     console.log('req.body', req.body)
+
+//     const productExist = await Orders.findOne({
+//       where: {
+//         userOrderId: req.body.userOrderId,
+//         orderProductsId: req.body.orderProductsId
+//       }
+//     })
+//     if (productExist.userOrderId) {
+//       let quantity = productExist.quantity + 1
+//       productExist.update({quantity: quantity})
+//     } else {
+//       const product = await Orders.create(req.body)
+
+//       res.json(product)
+//     }
+//   } catch (error) {
+//     console.error(error)
+//   }
+// })
+
 router.post('/', async (req, res, next) => {
   try {
     console.log('req.body', req.body)
+    // for(let i = 0; i < req.body.length; i++){
 
-    const productExist = await Orders.findOne({
-      where: {
-        userOrderId: req.body.userOrderId,
-        orderProductsId: req.body.orderProductsId
-      }
-    })
-    if (productExist.userOrderId) {
-      let quantity = productExist.quantity + 1
-      productExist.update({quantity: quantity})
-    } else {
-      const product = await Orders.create(req.body)
-
-      res.json(product)
-    }
+    // }
+    Orders.create({where: {quantity: req.body.length}})
   } catch (error) {
     console.error(error)
   }
