@@ -1,20 +1,21 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
-import {fetchCart, clearAll} from '../store/cart'
+import {fetchCart, clearAll, fetchDeleteFromCart} from '../store/cart'
 import axios from 'axios'
 
 class Cart extends Component {
   constructor() {
     super()
 
-    this.refresh = this.refresh.bind(this)
+    this.remove = this.remove.bind(this)
   }
   componentDidMount() {
     this.props.fetchCart()
   }
-  refresh() {
-    location.reload()
+  remove(id) {
+    this.props.fetchDeleteFromCart(id)
+    this.props.history.push('/cart')
   }
 
   render() {
@@ -48,8 +49,8 @@ class Cart extends Component {
                   <button
                     type="button"
                     onClick={() => {
-                      localStorage.removeItem(`${item.id}`) //make thunk creator like the rest to update the delete in the store
-                      this.refresh()
+                      this.remove(item.id)
+                      //make thunk creator like the rest to update the delete in the store
                     }}
                   >
                     remove
@@ -84,7 +85,8 @@ class Cart extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     fetchCart: () => dispatch(fetchCart()),
-    clearCart: () => dispatch(clearAll())
+    clearCart: () => dispatch(clearAll()),
+    fetchDeleteFromCart: id => dispatch(fetchDeleteFromCart(id))
   }
 }
 //thunk creator that does axios.post to api/orders to send the order information
