@@ -19,6 +19,7 @@ class Cart extends Component {
 
   render() {
     const items = this.props.cart
+    if (localStorage.getItem('randid')) localStorage.removeItem('randid')
     console.log(items)
     if (localStorage.length === 0) return <h1> No Items In Cart</h1>
     return (

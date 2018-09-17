@@ -13,7 +13,7 @@ const Navbar = props => {
       <Link to="/">
         <h1>LuxPerfume</h1>
       </Link>
-
+    
       <nav>
         {categoryArr.map(each => {
           return (
