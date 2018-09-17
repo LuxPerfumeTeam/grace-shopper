@@ -32,20 +32,20 @@ function clearCart() {
     type: CLEAR_CART
   }
 }
-function deleteFromCart(product) {
+function deleteFromCart(id) {
   return {
     type: DELETE_FROM_CART,
-    product
+    id
   }
 }
 //THUNK
 
 export const fetchDeleteFromCart = id => {
   return dispatch => {
-    console.log('what is this', localStorage.removeItem(`${id}`))
-    const removed = JSON.parse(localStorage.removeItem(`${id}`))
+    // console.log('what is this', JSON.parse(localStorage.removeItem(`${id}`)))
+    localStorage.removeItem(`${id}`)
 
-    const action = deleteFromCart(removed)
+    const action = deleteFromCart(id)
     dispatch(action)
   }
 }
@@ -97,7 +97,7 @@ export default function(state = cart, action) {
     case CLEAR_CART:
       return cart
     case DELETE_FROM_CART:
-      return state.items.filter(each => each.id !== action.product.id)
+      return state.filter(each => each.id !== action.id)
     default:
       return state
   }

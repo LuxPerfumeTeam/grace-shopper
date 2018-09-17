@@ -5,8 +5,8 @@ import {fetchCart, clearAll, fetchDeleteFromCart} from '../store/cart'
 import axios from 'axios'
 
 class Cart extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.remove = this.remove.bind(this)
   }
@@ -15,12 +15,13 @@ class Cart extends Component {
   }
   remove(id) {
     this.props.fetchDeleteFromCart(id)
+    this.props.fetchCart()
     this.props.history.push('/cart')
   }
 
   render() {
     const items = this.props.cart
-
+    // this.props.clearCart()
     console.log(items)
     if (localStorage.length === 0) return <h1> No Items In Cart</h1>
     return (

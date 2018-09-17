@@ -1,7 +1,7 @@
 //create a homepage eventully
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
-import Materialize from 'materialize-css'
+// import Materialize from 'materialize-css'
 
 export default class Homepage extends Component {
   componentDidMount() {

@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
-import Stripe from './stripe'
+// import Stripe from './stripe'
 import {clearAll} from '../store/cart'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
+import {fetchAddUser} from '../store/user'
 
 function validate(firstName, lastName, address, city, state, zipcode) {
   const errors = []
@@ -42,6 +43,7 @@ class BuyingForm extends Component {
       email: '',
       errors: []
     }
+    // this.sendUser = this.sendUser.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
@@ -69,9 +71,9 @@ class BuyingForm extends Component {
     if (errors.length > 0) {
       this.setState({errors})
     } else {
-      // this.props.addStudent(this.state)
+      this.props.fetchAddUser(this.state)
       this.props.clearCart()
-      this.props.history.push('/')
+      this.props.history.push('/stripe')
     }
   }
 
@@ -179,7 +181,7 @@ class BuyingForm extends Component {
             />
           </div>
         </div>
-        <Stripe />
+        {/* <Stripe /> */}
 
         <button color="primary" size="lg" type="submit">
           Complete Payment
@@ -191,7 +193,8 @@ class BuyingForm extends Component {
 //once complete payment, send the info to another thunk that posts to user api route to create a user/ guest(need if else statement for password)
 const mapDispatchToProps = dispatch => {
   return {
-    clearCart: () => dispatch(clearAll())
+    clearCart: () => dispatch(clearAll()),
+    fetchAddUser: user => dispatch(fetchAddUser(user))
   }
 }
 

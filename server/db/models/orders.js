@@ -9,9 +9,9 @@ const Orders = db.define('orders', {
   total: {
     type: Sequelize.INTEGER
   },
-  open: {
+  stripe: {
     type: Sequelize.BOOLEAN,
-    defaultValue: true
+    defaultValue: false
   }
 })
 
