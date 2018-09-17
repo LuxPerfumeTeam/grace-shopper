@@ -7,13 +7,15 @@ import product from './product'
 import singleproduct from './singleproduct'
 import categories from './categories'
 import cart from './cart'
+import orders from './orders'
 
 const reducer = combineReducers({
   user,
   product,
   singleproduct,
   categories,
-  cart
+  cart,
+  orders
 })
 
 const middleware = composeWithDevTools(
@@ -31,3 +33,4 @@ store.subscribe(() => {
 export default store
 export * from './user'
 export * from './categories'
+export * from './orders'

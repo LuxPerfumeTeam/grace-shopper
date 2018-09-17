@@ -13,6 +13,7 @@ const Navbar = props => {
       <Link to="/">
         <h1>LuxPerfume</h1>
       </Link>
+
       <nav>
         {categoryArr.map(each => {
           return (
@@ -22,8 +23,11 @@ const Navbar = props => {
           )
         })}
         <Link to="/">
+          {/* FIX THIS */}
           <p>All Products</p>
         </Link>
+      </nav>
+      <nav>
         {isLoggedIn && !isLoggedInAdmin ? (
           <div>
             {/* The navbar will show these links after you log in */}
@@ -36,6 +40,9 @@ const Navbar = props => {
           <div>
             {/* The navbar will show these links after you log in */}
             <Link to="/admin/home">My Admin Account</Link>
+            <Link to="/admin/addproduct">Add/Edit Products</Link>
+            <Link to="/admin/addcategory">Add/Edit Categories</Link>
+            <Link to="/admin/orders">Orders</Link>
             <a href="#" onClick={handleClick}>
               Logout
             </a>

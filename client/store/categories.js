@@ -6,6 +6,7 @@ import history from '../history'
  */
 const GET_CATEGORIES = 'GET_CATEGORIES'
 const SET_CATEGORIES_TYPE = 'SET_CATEGORIES_TYPE'
+const ADD_CATEGORIES = 'ADD_CATEGORIES'
 
 /**
  * INITIAL STATE
@@ -17,6 +18,12 @@ const categories = []
  */
 const getCategories = category => ({type: GET_CATEGORIES, category})
 const setCategoriesType = types => ({type: SET_CATEGORIES_TYPE, types})
+const addCategories = category => {
+  return {
+    type: ADD_CATEGORIES,
+    category
+  }
+}
 
 /**
  * THUNK CREATORS
@@ -39,6 +46,15 @@ export const fetchCategoryTypes = () => async dispatch => {
   }
 }
 
+export const addNewCategories = category => async dispatch => {
+  try {
+    const res = await axios.post(`/api/products/category`, category)
+    dispatch(addCategories(res.data))
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 /**
  * REDUCER
  */
@@ -48,6 +64,9 @@ export default function(state = categories, action) {
       return action.category
     case SET_CATEGORIES_TYPE:
       return action.types
+    case ADD_CATEGORIES: {
+      return [...state, action.category]
+    }
     default:
       return state
   }

@@ -10,7 +10,10 @@ import {
   SingleProduct,
   Cart,
   BuyingForm,
-  Admin
+  Admin,
+  addProduct,
+  addCategory,
+  Orders
 } from './components'
 import Categories from './components/categories'
 import {me} from './store'
@@ -64,6 +67,9 @@ class Routes extends Component {
               path="/category/:categoryName"
               component={Categories}
             />
+            <Route exact path="/admin/addproduct" component={addProduct} />
+            <Route exact path="/admin/addcategory" component={addCategory} />
+            <Route exact path="/admin/orders" component={Orders} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

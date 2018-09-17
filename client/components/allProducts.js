@@ -15,7 +15,6 @@ class AllProducts extends Component {
       quantity: 1,
       userOrderId: 1
     }
-    // this.addToCart = this.addToCart.bind(this)
   }
   componentDidMount() {
     this.props.fetchProducts()
@@ -24,15 +23,6 @@ class AllProducts extends Component {
   handleChange(event) {
     this.setState({[event.target.name]: event.target.value})
   }
-
-  // addToCart(selectedProduct) {
-  //   this.props.postToCart({
-  //     orderProductsId: 6,
-  //     name: selectedProduct.name,
-  //     quantity: 1,
-  //     userOrderId: 1
-  //   })
-  // }
 
   render() {
     const products = this.props.products

@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {addNewProduct} from '../store/categories'
+import {addNewProduct} from '../store/product'
+import {fetchProducts} from '../store/product'
+import {deleteAProduct} from '../store/product'
 
 class AdminProductForm extends Component {
   constructor() {
@@ -8,9 +10,10 @@ class AdminProductForm extends Component {
     this.state = {
       name: '',
       description: '',
-      price: 0,
-      inventory: 0,
-      image: ''
+      price: '',
+      inventory: ''
+      // categoryId: '',
+      // image: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -26,74 +29,136 @@ class AdminProductForm extends Component {
     this.setState({
       name: '',
       description: '',
-      price: 0,
-      inventory: 0,
-      image: ''
+      price: '',
+      inventory: ''
+      // categoryId: '',
+      // image: ''
     })
   }
 
+  componentDidMount() {
+    this.props.fetchProducts()
+  }
+
   render() {
+    const products = this.props.products
     return (
-      <form onSubmit={this.handleSubmit}>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <div>
+            <div>
+              <h3> Add a New Product </h3>
+              <label>Name</label>
+              <input
+                name="name"
+                type="text"
+                value={this.state.name}
+                onChange={this.handleChange}
+                placeholder="..."
+              />
+            </div>
+            <div>
+              <label>Description</label>
+              <input
+                name="description"
+                type="text"
+                value={this.state.description}
+                onChange={this.handleChange}
+                placeholder="..."
+              />
+            </div>
+            <div>
+              <label>Price</label>
+              <input
+                name="price"
+                type="text"
+                value={this.state.price}
+                onChange={this.handleChange}
+                placeholder="..."
+              />
+            </div>
+            <div>
+              <label>Inventory</label>
+              <input
+                name="inventory"
+                type="text"
+                value={this.state.inventory}
+                onChange={this.handleChange}
+                placeholder="..."
+              />
+            </div>
+            {/* <div>
+              <label>ImageUrl</label>
+              <input
+                name="image"
+                type="text"
+                value={this.state.image}
+                onChange={this.handleChange}
+                placeholder="..."
+              />
+            </div>
+            <div>
+              <label>CategoryId</label>
+              <input
+                name="categoryid"
+                type="text"
+                value={this.state.categoryId}
+                onChange={this.handleChange}
+                placeholder="1"
+              />
+            </div> */}
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+
         <div>
-          <div>
-            <label>Name</label>
-            <input
-              name="name"
-              type="text"
-              value={this.state.name}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div>
-            <label>Description</label>
-            <input
-              name="description"
-              type="text"
-              value={this.state.description}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div>
-            <label>Price</label>
-            <input
-              name="price"
-              type="text"
-              value={this.state.price}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div>
-            <label>Inventory</label>
-            <input
-              name="inventory"
-              type="text"
-              value={this.state.inventory}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div>
-            <label>Image</label>
-            <input
-              name="image"
-              type="text"
-              value={this.state.image}
-              onChange={this.handleChange}
-            />
-          </div>
-          <button type="submit">Submit</button>
+          <h3>Perfume Products</h3>
+          <table>
+            <tbody>
+              <tr>
+                <th>Product Name: </th>
+
+                <th>Product Price</th>
+                <th>Product Inventory </th>
+                <th>Product Description </th>
+                <th>Edit/Delete Product</th>
+              </tr>
+            </tbody>
+
+            {products.map(product => (
+              <tbody key={product.id}>
+                <tr>
+                  <th>{product.name}</th>
+                  <th>{product.price}</th>
+                  <th>{product.inventory}</th>
+                  <th>{product.description}</th>
+                  <th>
+                    <button type="submit">Edit</button>
+                    <button
+                      type="submit"
+                      onClick={() => deleteAProduct(product.id)}
+                    >
+                      Delete
+                    </button>
+                  </th>
+                </tr>
+              </tbody>
+            ))}
+          </table>
         </div>
-      </form>
+      </div>
     )
   }
 }
 
-const mapState = state => ({
-  categories: state.categories
+const mapStateToProps = state => ({
+  products: state.product
 })
 
-const mapDispatch = dispatch => ({
-  addNewCategory: product => dispatch(addNewProduct(product))
+const mapDispatchToProps = dispatch => ({
+  fetchProducts: () => dispatch(fetchProducts()),
+  addNewProduct: product => dispatch(addNewProduct(product)),
+  deleteAProduct: id => dispatch(deleteAProduct(id))
 })
 
-export default connect(mapState, mapDispatch)(AdminProductForm)
+export default connect(mapStateToProps, mapDispatchToProps)(AdminProductForm)
