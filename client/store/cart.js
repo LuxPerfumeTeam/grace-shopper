@@ -36,11 +36,13 @@ function clearCart() {
 export const fetchAddToCart = product => {
   return dispatch => {
     const id = product.id
-    localStorage.setItem(`${id}`, JSON.stringify(product))
-    const addedProduct = JSON.parse(localStorage.getItem(`${id}`))
+    if (typeof Number(id) === 'number') {
+      localStorage.setItem(`${id}`, JSON.stringify(product))
+      const addedProduct = JSON.parse(localStorage.getItem(`${id}`))
 
-    const action = addToCart(addedProduct)
-    dispatch(action)
+      const action = addToCart(addedProduct)
+      dispatch(action)
+    }
   }
 }
 

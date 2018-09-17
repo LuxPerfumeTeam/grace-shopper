@@ -10,7 +10,6 @@ class AdminProductForm extends Component {
       description: '',
       price: '',
       inventory: '',
-      categoryId: '',
       image: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -25,12 +24,12 @@ class AdminProductForm extends Component {
   handleSubmit(evt) {
     evt.preventDefault()
     this.props.addNewProduct(this.state)
+    this.props.deleteAProduct(this.state)
     this.setState({
       name: '',
       description: '',
       price: '',
       inventory: '',
-      categoryId: '',
       image: ''
     })
     this.props.history.push('/admin/addproduct')
@@ -101,16 +100,6 @@ class AdminProductForm extends Component {
                 onChange={this.handleChange}
               />
             </div>
-            <div>
-              <label>CategoryId</label>
-              <input
-                name="categoryid"
-                type="text"
-                value={this.state.categoryId}
-                onChange={this.handleChange}
-                placeholder="1"
-              />
-            </div>
 
             <button type="submit">Submit</button>
           </div>
@@ -121,7 +110,7 @@ class AdminProductForm extends Component {
           <table>
             <tbody>
               <tr>
-                <th>Product Name: </th>
+                <th>Product Name </th>
 
                 <th>Product Price</th>
                 <th>Product Inventory </th>

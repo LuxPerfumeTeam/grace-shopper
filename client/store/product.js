@@ -101,7 +101,7 @@ export default function(state = defaultProducts, action) {
     // }
     case DELETE_PRODUCT:
       //filter, get an array that contains everything BUT deleted product, set that array on state
-      return action.product
+      return state.filter(x => x.id === action.product.id)
     default:
       return state
   }
