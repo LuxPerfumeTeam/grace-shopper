@@ -8,11 +8,13 @@ export default class Homepage extends Component {
     document.addEventListener('DOMContentLoaded', () => {
       let elems = document.querySelectorAll('.carousel')
       let instances = Materialize.Carousel.init(elems, {
-        numVisible: 3
+        indicators: true,
+
+        duration: 200
       })
-      // let carousel = instances[0]
+      let carousel = instances[0]
       setInterval(() => {
-        // carousel.next()
+        carousel.next()
       }, 4000)
     })
   }
@@ -28,19 +30,31 @@ export default class Homepage extends Component {
           </Link>
           <div className="carousel">
             <a className="carousel-item" href="#one!">
-              <img src="perfume1.jpg" />
+              <img
+                className="responsive-img carousel-image"
+                src="perfume1.jpg"
+              />
             </a>
             <a className="carousel-item" href="#two!">
-              <img src="perfume2.jpg" />
+              <img
+                className="responsive-img carousel-image"
+                src="perfume2.jpg"
+              />
             </a>
             <a className="carousel-item" href="#three!">
-              <img src="perfume3.jpg" />
+              <img
+                className="responsive-img carousel-image"
+                src="perfume3.jpg"
+              />
             </a>
             <a className="carousel-item" href="#four!">
               <img src="perfume4.jpg" />
             </a>
             <a className="carousel-item" href="#five!">
-              <img src="perfume5.jpg" />
+              <img
+                className="responsive-img carousel-image"
+                src="perfume5.jpg"
+              />
             </a>
           </div>
         </div>

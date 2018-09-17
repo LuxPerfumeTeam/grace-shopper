@@ -50,6 +50,7 @@ class AllProducts extends Component {
               <button
                 type="submit"
                 onClick={() => {
+                  console.log('clicking')
                   this.props.fetchAddToCart(product)
                 }}
               >
