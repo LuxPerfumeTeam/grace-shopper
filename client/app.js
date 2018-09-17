@@ -1,13 +1,16 @@
 import React from 'react'
 
-import {Navbar} from './components'
+import {Navbar, AllProducts} from './components'
 import Routes from './routes'
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
 
 const App = () => {
   return (
     <div>
-      <Navbar />
-      <Routes />
+      <MuiThemeProvider>
+        <Navbar />
+        <Routes />
+      </MuiThemeProvider>
     </div>
   )
 }
