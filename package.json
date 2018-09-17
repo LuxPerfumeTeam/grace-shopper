@@ -12,13 +12,13 @@
     "deploy": "script/deploy",
     "lint": "eslint ./ --ignore-path .gitignore",
     "lint-fix": "npm run lint -- --fix",
-    "precommit": "lint-staged",
-    "prepare": "if [ -d .git ]; then npm-merge-driver install; fi",
+    "precommit": "# lint-staged",
+    "prepare": "npm-merge-driver install",
     "prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
-    "postinstall": "echo> secrets.js",
     "seed": "node script/seed.js",
     "start": "node server",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & npm run start-server",
+    "start-dev-win": "set NODE_ENV=development & start npm run build-client-watch & start npm run start-server",
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
     "test": "NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" --require @babel/polyfill --require @babel/register"
   },
@@ -44,6 +44,7 @@
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "history": "^4.6.3",
+    "materialize-css": "^1.0.0",
     "morgan": "^1.8.1",
     "passport": "^0.3.2",
     "passport-google-oauth": "^1.0.0",
@@ -59,6 +60,7 @@
     "redux-thunk": "^2.3.0",
     "sequelize": "^4.38.0",
     "socket.io": "^2.1.1",
+    "stripe": "^6.10.0",
     "typeface-roboto": "0.0.54"
   },
   "devDependencies": {
@@ -86,6 +88,7 @@
     "eslint-config-fullstack": "^5.1.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-react": "^7.10.0",
+    "file-loader": "^2.0.0",
     "husky": "^0.14.3",
     "lint-staged": "^7.2.0",
     "mocha": "^5.2.0",
@@ -96,6 +99,7 @@
     "redux-devtools-extension": "^2.13.5",
     "redux-mock-store": "^1.5.3",
     "supertest": "^3.1.0",
+    "url-loader": "^1.1.1",
     "webpack": "^4.16.4",
     "webpack-cli": "^3.1.0"
   }

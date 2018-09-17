@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {fetchCategory} from '../store/categories'
 import {Link, withRouter} from 'react-router-dom'
+import {fetchAddToCart} from '../store/cart'
 
 class Categories extends Component {
   constructor(props) {
@@ -48,6 +49,17 @@ class Categories extends Component {
                 {product.name}
               </Link>
               {product.price}
+
+              <Link to="/cart">
+                <button
+                  type="submit"
+                  onClick={() => {
+                    this.props.fetchAddToCart(product)
+                  }}
+                >
+                  Add to Cart
+                </button>
+              </Link>
             </div>
           )
         })}
@@ -66,7 +78,8 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchCategory: gender => {
       dispatch(fetchCategory(gender))
-    }
+    },
+    fetchAddToCart: product => dispatch(fetchAddToCart(product))
   }
 }
 
