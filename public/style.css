@@ -14,3 +14,13 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.nav-wrapper {
+  background-color: beige !important;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.black-text li a {
+  color: black;
+}

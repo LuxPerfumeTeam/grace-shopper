@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link, withRouter} from 'react-router-dom'
@@ -8,14 +8,15 @@ const categoryArr = ['Men', 'Women']
 
 const Navbar = props => {
   const {handleClick, isLoggedIn, isLoggedInAdmin} = props
+
   return (
     <div className="navbar-fixed">
       <nav>
-        <div className="nav-wrapper">
-          <Link to="/" className="brand-logo center">
+        <div className="nav-wrapper black-text">
+          <Link to="/" className="brand-logo center black-text">
             LuxPerfume
           </Link>
-          <ul className="left hide-on-med-and-down">
+          <ul className="left hide-on-med-and-down black-text">
             {categoryArr.map(each => {
               return (
                 <li>
@@ -25,35 +26,6 @@ const Navbar = props => {
                 </li>
               )
             })}
-            {isLoggedIn && !isLoggedInAdmin ? (
-              <div>
-                {/* The navbar will show these links after you log in */}
-                <Link to="/home">My Account</Link>
-                <a href="#" onClick={handleClick}>
-                  Logout
-                </a>
-              </div>
-            ) : isLoggedInAdmin ? (
-              <div>
-                {/* The navbar will show these links after you log in */}
-                <Link to="/admin/home">My Admin Account</Link>
-                <a href="#" onClick={handleClick}>
-                  Logout
-                </a>
-              </div>
-            ) : (
-              <div>
-                {/* The navbar will show these links before you log in */}
-                <Link to="/login">Login</Link>
-                <Link to="/signup">Sign Up</Link>
-              </div>
-            )}
-            <li>
-              <a href="sass.html">Man</a>
-            </li>
-            <li>
-              <a href="badges.html">Woman</a>
-            </li>
           </ul>
           <ul className="right hide-on-med-and-down">
             <li>
@@ -61,12 +33,38 @@ const Navbar = props => {
                 <i className="material-icons">add_shopping_cart</i>
               </Link>
             </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/signup">Sign Up</Link>
-            </li>
+            {isLoggedIn && !isLoggedInAdmin ? (
+              <Fragment>
+                <li>
+                  <Link to="/home">My Account</Link>
+                </li>
+                <li>
+                  <a href="#" onClick={handleClick}>
+                    Logout
+                  </a>
+                </li>
+              </Fragment>
+            ) : isLoggedInAdmin ? (
+              <Fragment>
+                <li>
+                  <Link to="/admin/home">My Admin Account</Link>
+                </li>
+                <li>
+                  <a href="#" onClick={handleClick}>
+                    Logout
+                  </a>
+                </li>
+              </Fragment>
+            ) : (
+              <Fragment>
+                <li>
+                  <Link to="/login">Login</Link>
+                </li>
+                <li>
+                  <Link to="/signup">Sign Up</Link>
+                </li>
+              </Fragment>
+            )}
           </ul>
         </div>
       </nav>
