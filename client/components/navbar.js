@@ -9,7 +9,9 @@ const categoryArr = ['Men', 'Women']
 const Navbar = props => {
   const {handleClick, isLoggedIn, isLoggedInAdmin} = props
   return (
+
     <div className="navbar-fixed">
+
       <nav>
         <div className="nav-wrapper">
           <Link to="/" className="brand-logo center">

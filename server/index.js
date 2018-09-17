@@ -12,6 +12,9 @@ const app = express()
 const socketio = require('socket.io')
 module.exports = app
 
+app.use(passport.initialize())
+app.use(passport.session())
+
 // This is a global Mocha hook, used for resource cleanup.
 // Otherwise, Mocha v4+ never quits after tests.
 if (process.env.NODE_ENV === 'test') {
