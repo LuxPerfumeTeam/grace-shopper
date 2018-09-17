@@ -13,7 +13,7 @@
     "lint": "eslint ./ --ignore-path .gitignore",
     "lint-fix": "npm run lint -- --fix",
     "precommit": "# lint-staged",
-    "prepare": "npm-merge-driver install",
+    "prepare": "if [ -d .git ]; then npm-merge-driver install; fi",
     "prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
     "seed": "node script/seed.js",
     "start": "node server",
@@ -60,7 +60,6 @@
     "redux-thunk": "^2.3.0",
     "sequelize": "^4.38.0",
     "socket.io": "^2.1.1",
-    "stripe": "^6.10.0",
     "typeface-roboto": "0.0.54"
   },
   "devDependencies": {
