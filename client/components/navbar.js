@@ -11,10 +11,6 @@ const Navbar = props => {
 
   return (
     <div>
-      <Link to="/home">
-        <h1>LuxPerfume</h1>
-      </Link>
-
       <nav>
         <div className="nav-wrapper black-text">
           <Link
