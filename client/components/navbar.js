@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link, withRouter} from 'react-router-dom'
 import {logout} from '../store'
+import SearchForm from './search'
 
 const categoryArr = ['Men', 'Women']
 
@@ -16,10 +17,13 @@ const Navbar = props => {
           <Link
             to="/"
             className="brand-logo center black-text v-align wrapper"
-            onClick={() => location.reload()}
+            // onClick={() => location.reload()}
           >
             LUXPERFUME
           </Link>
+
+          <SearchForm />
+
           <ul className="left hide-on-med-and-down black-text">
             {categoryArr.map(each => {
               return (
