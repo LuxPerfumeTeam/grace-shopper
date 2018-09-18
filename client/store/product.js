@@ -74,14 +74,14 @@ export const deleteAProduct = productId => {
   }
 }
 
-// export const editProduct = (product) => async dispatch => {
-//   try {
-//     const products = await axios.put(`/api/products/${product.id}`, product)
-//     dispatch(editProducts(products.data || defaultProducts))
-//   } catch (error) {
-//     console.error(error)
-//   }
-// }
+export const editProduct = (id, product) => async dispatch => {
+  try {
+    const products = await axios.put(`/api/products/${id}`, product)
+    dispatch(editProducts(products.data || defaultProducts))
+  } catch (error) {
+    console.error(error)
+  }
+}
 
 //Reducer
 export default function(state = defaultProducts, action) {
@@ -91,17 +91,11 @@ export default function(state = defaultProducts, action) {
     case ADD_PRODUCTS: {
       return [...state, action.product]
     }
-    // case EDIT_PRODUCTS: {
-    //   return state.map(item => {
-    //     if (item.id === action.products.id) {
-    //       return action.product
-    //     }
-    //     return item
-    //   })
-    // }
+    case EDIT_PRODUCTS: {
+      return action.product
+    }
     case DELETE_PRODUCT:
-      //filter, get an array that contains everything BUT deleted product, set that array on state
-      return state.filter(x => x.id === action.product.id)
+      return action.product
     default:
       return state
   }
