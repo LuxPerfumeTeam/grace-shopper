@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {fetchProducts, deleteAProduct, addNewProduct} from '../store/product'
-
+import {Link} from 'react-router-dom'
 class AdminProductForm extends Component {
   constructor() {
     super()
@@ -24,7 +24,7 @@ class AdminProductForm extends Component {
   handleSubmit(evt) {
     evt.preventDefault()
     this.props.addNewProduct(this.state)
-    this.props.deleteAProduct(this.state)
+
     this.setState({
       name: '',
       description: '',
@@ -32,7 +32,6 @@ class AdminProductForm extends Component {
       inventory: '',
       image: ''
     })
-    this.props.history.push('/admin/addproduct')
   }
 
   componentDidMount() {
@@ -127,7 +126,9 @@ class AdminProductForm extends Component {
                   <th>{product.inventory}</th>
                   <th>{product.description}</th>
                   <th>
-                    <button type="submit">Edit</button>
+                    <Link to={`/admin/editProduct/${product.id}`}>
+                      <button type="submit">Edit</button>
+                    </Link>
                     <button
                       type="submit"
                       onClick={() => this.delete(product.id)}
