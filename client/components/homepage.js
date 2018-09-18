@@ -18,6 +18,7 @@ export default class Homepage extends Component {
       }, 4000)
     })
   }
+
   render() {
     return (
       <div id="carousel" className="carousel-slider center">

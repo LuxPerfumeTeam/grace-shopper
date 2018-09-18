@@ -14,18 +14,17 @@ const Navbar = props => {
       <nav>
         <div className="nav-wrapper black-text">
           <Link
-            to="/products"
+            to="/"
             className="brand-logo center black-text v-align wrapper"
+            onClick={() => location.reload()}
           >
             LUXPERFUME
           </Link>
           <ul className="left hide-on-med-and-down black-text">
             {categoryArr.map(each => {
               return (
-                <li>
-                  <Link key={each} to={`/category/${each}`}>
-                    {each}
-                  </Link>
+                <li key={each}>
+                  <Link to={`/category/${each}`}>{each}</Link>
                 </li>
               )
             })}
