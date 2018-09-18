@@ -1,7 +1,12 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
-import {fetchCart, clearAll, fetchDeleteFromCart} from '../store/cart'
+import {
+  fetchCart,
+  fetchAddToCart,
+  clearAll,
+  fetchDeleteFromCart
+} from '../store/cart'
 import axios from 'axios'
 
 class Cart extends Component {
@@ -9,6 +14,7 @@ class Cart extends Component {
     super(props)
 
     this.remove = this.remove.bind(this)
+    this.add = this.add.bind(this)
   }
   componentDidMount() {
     this.props.fetchCart()
@@ -18,7 +24,9 @@ class Cart extends Component {
     this.props.fetchCart()
     this.props.history.push('/cart')
   }
-
+  add(product) {
+    this.props.fetchAddToCart(product)
+  }
   render() {
     const items = this.props.cart
     // this.props.clearCart()
@@ -40,7 +48,7 @@ class Cart extends Component {
                 <li>Price: {item.price}</li>
 
                 <div>
-                  <button type="button" onClick={() => item.quantity++}>
+                  <button type="button" onClick={() => this.add(item)}>
                     +
                   </button>
                   <li>{item.quantity}</li>
@@ -87,7 +95,8 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchCart: () => dispatch(fetchCart()),
     clearCart: () => dispatch(clearAll()),
-    fetchDeleteFromCart: id => dispatch(fetchDeleteFromCart(id))
+    fetchDeleteFromCart: id => dispatch(fetchDeleteFromCart(id)),
+    fetchAddToCart: product => dispatch(fetchAddToCart(product))
   }
 }
 //thunk creator that does axios.post to api/orders to send the order information

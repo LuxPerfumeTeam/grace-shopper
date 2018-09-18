@@ -13,13 +13,13 @@ const Navbar = props => {
     <div className="navbar-fixed">
       <nav>
         <div className="nav-wrapper black-text">
-          <Link
+          {/* <Link
             to="/"
             className="brand-logo center black-text v-align wrapper"
             onClick={() => location.reload()}
           >
             LUXPERFUME
-          </Link>
+          </Link> */}
           <ul className="left hide-on-med-and-down black-text">
             {categoryArr.map(each => {
               return (
