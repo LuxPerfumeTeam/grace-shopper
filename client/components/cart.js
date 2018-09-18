@@ -5,7 +5,8 @@ import {
   fetchCart,
   fetchAddToCart,
   clearAll,
-  fetchDeleteFromCart
+  fetchDeleteFromCart,
+  fetchDeleteOneFromCart
 } from '../store/cart'
 import axios from 'axios'
 
@@ -15,6 +16,7 @@ class Cart extends Component {
 
     this.remove = this.remove.bind(this)
     this.add = this.add.bind(this)
+    this.delete = this.delete.bind(this)
   }
   componentDidMount() {
     this.props.fetchCart()
@@ -26,13 +28,16 @@ class Cart extends Component {
   }
   add(product) {
     this.props.fetchAddToCart(product)
+    this.props.history.push('/cart')
+  }
 
+  delete(product) {
+    this.props.fetchDeleteOneFromCart(product)
     this.props.history.push('/cart')
   }
   render() {
     const items = this.props.cart
-    // this.props.clearCart()
-    console.log('items', items)
+    this.props.clearCart()
     if (localStorage.length === 0) return <h1> No Items In Cart</h1>
     return (
       <div>
@@ -54,7 +59,7 @@ class Cart extends Component {
                     +
                   </button>
                   <li>{item.quantity}</li>
-                  <button type="button" onClick={() => item.quantity--}>
+                  <button type="button" onClick={() => this.delete(item)}>
                     -
                   </button>
                   <button
@@ -98,6 +103,8 @@ const mapDispatchToProps = dispatch => {
     fetchCart: () => dispatch(fetchCart()),
     clearCart: () => dispatch(clearAll()),
     fetchDeleteFromCart: id => dispatch(fetchDeleteFromCart(id)),
+    fetchDeleteOneFromCart: product =>
+      dispatch(fetchDeleteOneFromCart(product)),
     fetchAddToCart: product => dispatch(fetchAddToCart(product))
   }
 }

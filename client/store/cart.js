@@ -4,7 +4,7 @@ const ADD_TO_CART = 'ADD_TO_CART'
 const GET_CART = 'GET_CART'
 const CLEAR_CART = 'CLEAR_CART'
 const DELETE_FROM_CART = 'DELETE_CART'
-
+const DELETE_ONE_FROM_CART = 'DELETE_ONE_FROM_CART'
 //empty cart
 
 //INITIAL STATE
@@ -32,6 +32,13 @@ function clearCart() {
     type: CLEAR_CART
   }
 }
+
+function deleteOneFromCart(product) {
+  return {
+    type: DELETE_ONE_FROM_CART,
+    product
+  }
+}
 function deleteFromCart(id) {
   return {
     type: DELETE_FROM_CART,
@@ -40,10 +47,17 @@ function deleteFromCart(id) {
 }
 //THUNK
 
+export const fetchDeleteOneFromCart = product => {
+  console.log('local storage', localStorage.getItem(1))
+  return dispatch => {
+    const action = deleteOneFromCart(product)
+    dispatch(action)
+  }
+}
 export const fetchDeleteFromCart = id => {
   return dispatch => {
-    // console.log('what is this', JSON.parse(localStorage.removeItem(`${id}`)))
     localStorage.removeItem(`${id}`)
+    console.log('localStorage', localStorage.getItem(id))
 
     const action = deleteFromCart(id)
     dispatch(action)
@@ -54,9 +68,9 @@ export const fetchAddToCart = product => {
     const id = product.id
     if (typeof Number(id) === 'number') {
       localStorage.setItem(`${id}`, JSON.stringify(product))
-      const addedProduct = JSON.parse(localStorage.getItem(`${id}`))
+      //const addedProduct = JSON.parse(localStorage.getItem(`${id}`))
 
-      const action = addToCart(addedProduct)
+      const action = addToCart(product)
       dispatch(action)
     }
   }
@@ -73,7 +87,6 @@ export const fetchCart = () => {
       let value = localStorage[each]
       return JSON.parse(value)
     })
-
     const action = getCart(arrOfProducts)
     dispatch(action)
   }
@@ -95,7 +108,6 @@ export default function(state = cart, action) {
           return state
         }
       }
-
       return [...state, action.product]
 
     case GET_CART:
@@ -104,6 +116,13 @@ export default function(state = cart, action) {
       return cart
     case DELETE_FROM_CART:
       return state.filter(each => each.id !== action.id)
+    case DELETE_ONE_FROM_CART:
+      for (let i = 0; i < state.length; ++i) {
+        if (state[i].id === action.product.id) {
+          state[i].quantity--
+        }
+      }
+      return state.filter(each => each.quantity > 0)
     default:
       return state
   }
