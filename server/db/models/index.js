@@ -4,23 +4,26 @@ const Product = require('./product')
 const Orders = require('./orders')
 const Category = require('./category')
 
-Product.hasMany(Review, {as: 'productReviews'})
-User.belongsTo(Review, {as: 'userReview'})
+Product.hasMany(Review)
+User.hasMany(Review)
+Review.belongsTo(User)
 
 // User.belongsTo(Orders, {as: 'userOrders'}) //it comes up 3x user with order so don't know which is supposed to be the right one
 
 Product.belongsTo(Category)
+Category.hasMany(Product)
 
 // Orders.belongsToMany(Products, {through: 'orderProducts'})
 // Products.belongsToMany(Orders, {through: 'orderProducts'})
 
-User.belongsToMany(Orders, {through: 'userOrders'})
+// User.belongsToMany(Orders, {through: 'userOrders'})
 //Orders.belongsToMany(Products, {through: 'OrderProducts'})
 
 //FROM YOU GUYS
-// Products.belongsToMany(Orders, {through: 'OrderProducts'})
-// Orders.belongsTo(Products, {as: 'orderProducts'})
-// Orders.belongsTo(User, {as: 'userOrder'})
+Product.belongsToMany(Orders, {through: 'OrderProducts'})
+Orders.belongsToMany(Product, {through: 'OrderProducts'})
+Orders.belongsTo(User)
+User.hasMany(Orders)
 
 // Reviews.belongsTo(User)
 // Reviews.belongsTo(Products)
