@@ -37,8 +37,6 @@ class Cart extends Component {
   }
   render() {
     const items = this.props.cart
-    //this.props.clearCart()
-    //changed from if (localStorage.length === 0)
     if (items.length === 0) return <h1> No Items In Cart</h1>
     return (
       <div>
