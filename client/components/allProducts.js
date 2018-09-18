@@ -39,24 +39,29 @@ class AllProducts extends Component {
     return (
       <div>
         <h3>Perfume</h3>
-
         {products.map(product => (
-          <div key={product.id}>
-            <Link to={`/products/${product.id}`}>
-              <img src={product.image} />
-              {product.name}
-            </Link>
-            <Link to="/cart">
-              <button
-                type="submit"
-                onClick={() => {
-                  console.log('clicking')
-                  this.props.fetchAddToCart(product)
-                }}
-              >
-                Add to Cart
-              </button>
-            </Link>
+          <div key={product.id} className="row">
+            <div className="col s12 m4">
+              <div className="card-image">
+                <img src={product.image} />
+                <span className="card-title" myClassHey>
+                  <i className="material-icons right" />
+                </span>
+                <Link to={`/products/${product.id}`}>{product.name}</Link>
+                <Link to="/cart">
+                  <button
+                    className="btn-floating btn-large waves-effect waves-light red"
+                    type="submit"
+                    name="action"
+                    onClick={() => {
+                      this.props.fetchAddToCart(product)
+                    }}
+                  >
+                    <i className="material-icons right">add</i>
+                  </button>
+                </Link>
+              </div>
+            </div>
           </div>
         ))}
       </div>

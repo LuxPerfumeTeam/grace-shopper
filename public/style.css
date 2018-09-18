@@ -39,3 +39,8 @@ form div {
 nav {
   height: 60px !important;
 }
+
+myClassHey {
+  font-size: 80px !important;
+  font-family: 'Hoefler Text';
+}
