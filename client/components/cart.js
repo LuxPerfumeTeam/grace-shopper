@@ -40,7 +40,8 @@ class Cart extends Component {
     if (items.length === 0) return <h1> No Items In Cart</h1>
     return (
       <div>
-        <h3>Cart</h3>
+        <h4>Shopping Cart</h4>
+
         <ul>
           {items.length &&
             items.map(item => (

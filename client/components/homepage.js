@@ -18,23 +18,6 @@ class Homepage extends Component {
       }, 4000)
     })()
   }
-  // this.setState(() => ({
-  //   init: init++
-
-  // componentWillUpdate() {
-  //   document.addEventListener('DOMContentLoaded', () => {
-  //     let elems = document.querySelectorAll('.carousel')
-  //     let instances = Materialize.Carousel.init(elems, {
-  //       indicators: true,
-  //       fullwidth: true,
-  //       duration: 200
-  //     })
-  //     let carousel = instances[0]
-  //     setInterval(() => {
-  //       carousel.next()
-  //     }, 4000)
-  //   })
-  // }
 
   render() {
     return (
