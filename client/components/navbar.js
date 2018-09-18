@@ -17,8 +17,12 @@ const Navbar = props => {
 
       <nav>
         <div className="nav-wrapper black-text">
-          <Link to="/" className="brand-logo center black-text">
-            LuxPerfume
+          <Link
+            to="/"
+            className="brand-logo center black-text v-align wrapper"
+            onClick={() => location.reload()}
+          >
+            LUXPERFUME
           </Link>
           <ul className="left hide-on-med-and-down black-text">
             {categoryArr.map(each => {
