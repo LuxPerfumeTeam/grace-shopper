@@ -48,7 +48,7 @@ function deleteFromCart(id) {
 //THUNK
 
 export const fetchDeleteOneFromCart = product => {
-  console.log('local storage', localStorage.getItem(1))
+  //console.log('local storage', localStorage.getItem(1))
   return dispatch => {
     const action = deleteOneFromCart(product)
     dispatch(action)
@@ -63,14 +63,15 @@ export const fetchDeleteFromCart = id => {
     dispatch(action)
   }
 }
+
 export const fetchAddToCart = product => {
   return dispatch => {
     const id = product.id
     if (typeof Number(id) === 'number') {
       localStorage.setItem(`${id}`, JSON.stringify(product))
-      //const addedProduct = JSON.parse(localStorage.getItem(`${id}`))
+      const addedProduct = JSON.parse(localStorage.getItem(`${id}`))
 
-      const action = addToCart(product)
+      const action = addToCart(addedProduct)
       dispatch(action)
     }
   }
@@ -99,10 +100,11 @@ export const clearAll = () => {
   }
 }
 
-export default function(state = cart, action) {
+export default function(state = cart.items, action) {
   switch (action.type) {
     case ADD_TO_CART:
       for (let i = 0; i < state.length; ++i) {
+        console.log('i', state[i])
         if (state[i].id === action.product.id) {
           state[i].quantity++
           return state
