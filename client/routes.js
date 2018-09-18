@@ -16,6 +16,7 @@ import {
 import Categories from './components/categories'
 import {me} from './store'
 import Stripe from './components/stripe'
+import {fetchCart} from './store/cart'
 
 /**
  * COMPONENT
@@ -91,6 +92,7 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me())
+      dispatch(fetchCart())
     }
   }
 }

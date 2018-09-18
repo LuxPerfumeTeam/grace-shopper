@@ -68,10 +68,17 @@ export const fetchAddToCart = product => {
   return dispatch => {
     const id = product.id
     if (typeof Number(id) === 'number') {
-      localStorage.setItem(`${id}`, JSON.stringify(product))
-      const addedProduct = JSON.parse(localStorage.getItem(`${id}`))
+      const localStorageObj = JSON.parse(localStorage.getItem(id))
+      if (localStorageObj && localStorageObj.id) {
+        localStorageObj.quantity++
+      }
 
-      const action = addToCart(addedProduct)
+      console.log('local storage object', localStorageObj)
+
+      localStorage.setItem(`${id}`, JSON.stringify(product))
+      //const addedProduct = JSON.parse(localStorage.getItem(`${id}`))
+
+      const action = addToCart(product)
       dispatch(action)
     }
   }
@@ -102,16 +109,17 @@ export const clearAll = () => {
 
 export default function(state = cart.items, action) {
   switch (action.type) {
-    case ADD_TO_CART:
-      for (let i = 0; i < state.length; ++i) {
-        console.log('i', state[i])
-        if (state[i].id === action.product.id) {
-          state[i].quantity++
-          return state
+    case ADD_TO_CART: {
+      const stateCopy = [...state]
+      for (let i = 0; i < stateCopy.length; ++i) {
+        if (stateCopy[i].id === action.product.id) {
+          stateCopy[i].quantity += 1
+          console.log('stateCopy', stateCopy)
+          return stateCopy
         }
       }
       return [...state, action.product]
-
+    }
     case GET_CART:
       return action.items
     case CLEAR_CART:

@@ -19,15 +19,15 @@ class Cart extends Component {
     this.delete = this.delete.bind(this)
   }
   componentDidMount() {
-    this.props.fetchCart()
+    // this.props.fetchCart()
   }
   remove(id) {
     this.props.fetchDeleteFromCart(id)
     this.props.fetchCart()
     this.props.history.push('/cart')
   }
-  add(product) {
-    this.props.fetchAddToCart(product)
+  async add(product) {
+    await this.props.fetchAddToCart(product)
     this.props.history.push('/cart')
   }
 
