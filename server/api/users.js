@@ -15,3 +15,20 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.post('/', async (req, res, next) => {
+  try {
+    console.log('req.body', req.body)
+    // const existingUser = User.findAll({
+    //   where: {
+    //     email: req.body.email
+    //   }
+    // })
+    // if (!existingUser.firstName) {
+    // console.log('in if route')
+    const user = await User.create(req.body)
+    res.json(user)
+  } catch (error) {
+    console.error(error)
+  }
+})

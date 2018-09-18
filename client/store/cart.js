@@ -3,6 +3,7 @@
 const ADD_TO_CART = 'ADD_TO_CART'
 const GET_CART = 'GET_CART'
 const CLEAR_CART = 'CLEAR_CART'
+const DELETE_FROM_CART = 'DELETE_CART'
 
 //empty cart
 
@@ -31,8 +32,23 @@ function clearCart() {
     type: CLEAR_CART
   }
 }
-
+function deleteFromCart(id) {
+  return {
+    type: DELETE_FROM_CART,
+    id
+  }
+}
 //THUNK
+
+export const fetchDeleteFromCart = id => {
+  return dispatch => {
+    // console.log('what is this', JSON.parse(localStorage.removeItem(`${id}`)))
+    localStorage.removeItem(`${id}`)
+
+    const action = deleteFromCart(id)
+    dispatch(action)
+  }
+}
 export const fetchAddToCart = product => {
   return dispatch => {
     const id = product.id
@@ -80,6 +96,8 @@ export default function(state = cart, action) {
       return action.items
     case CLEAR_CART:
       return cart
+    case DELETE_FROM_CART:
+      return state.filter(each => each.id !== action.id)
     default:
       return state
   }

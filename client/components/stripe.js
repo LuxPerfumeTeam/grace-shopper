@@ -1,7 +1,10 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import {clearAll} from '../store/cart'
+import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom'
 
-export default class Cards extends Component {
+class Stripe extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -31,14 +34,15 @@ export default class Cards extends Component {
   componentDidMount() {
     this.loadStripe(() => {
       this.stripeHandler = window.StripeCheckout.configure({
-        key: 'pk_test_DkM3NlMql92QieNJkm1PjQbL',
+        key: 'pk_test_TYooMQauvdEDq54NiTphI7jx',
         image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
         locale: 'auto',
-        token: token => {
+        token: async token => {
+          console.log('token', token.id)
           this.setState({loading: true})
           // use fetch or some other AJAX library here if you dont want to use axios
-          axios.post('/api/payment', {
-            stripeToken: token.id
+          await axios.put('/api/stripe', {
+            stripeToken: token
           })
         }
       })
@@ -65,6 +69,7 @@ export default class Cards extends Component {
       allowRememberMe: false
     })
     e.preventDefault()
+    this.props.clearCart()
   }
 
   render() {
@@ -82,3 +87,11 @@ export default class Cards extends Component {
     )
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    clearCart: () => dispatch(clearAll())
+  }
+}
+
+module.exports = withRouter(connect(null, mapDispatchToProps)(Stripe))

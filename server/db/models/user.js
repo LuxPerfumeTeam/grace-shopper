@@ -53,6 +53,9 @@ const User = db.define('user', {
   admin: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
+  },
+  stripeToken: {
+    type: Sequelize.STRING
   }
 })
 

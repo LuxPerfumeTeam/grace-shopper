@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
-import Stripe from './stripe'
+// import Stripe from './stripe'
 import {clearAll} from '../store/cart'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
+import {fetchAddUser} from '../store/user'
 
 function validate(firstName, lastName, address, city, state, zipcode) {
   const errors = []
@@ -42,6 +43,7 @@ class BuyingForm extends Component {
       email: '',
       errors: []
     }
+    // this.sendUser = this.sendUser.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
@@ -69,9 +71,9 @@ class BuyingForm extends Component {
     if (errors.length > 0) {
       this.setState({errors})
     } else {
-      // this.props.addStudent(this.state)
+      this.props.fetchAddUser(this.state)
       this.props.clearCart()
-      this.props.history.push('/')
+      this.props.history.push('/stripe')
     }
   }
 
@@ -82,116 +84,119 @@ class BuyingForm extends Component {
   render() {
     const {errors} = this.state
     return (
-      <form onSubmit={this.handleSubmit}>
-        {errors.map(error => <p key={error}>Error: {error}</p>)}
-        <div>
-          <label>First Name</label>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          {errors.map(error => <p key={error}>Error: {error}</p>)}
           <div>
-            <input
-              type="text"
-              name="firstName"
-              value={this.state.firstName}
-              onChange={this.handleChange}
-            />
+            <label>First Name</label>
+            <div>
+              <input
+                type="text"
+                name="firstName"
+                value={this.state.firstName}
+                onChange={this.handleChange}
+              />
+            </div>
           </div>
-        </div>
 
-        <div>
-          <label>Last Name </label>
           <div>
-            <input
-              type="text"
-              name="lastName"
-              value={this.state.lastName}
-              onChange={this.handleChange}
-            />
+            <label>Last Name </label>
+            <div>
+              <input
+                type="text"
+                name="lastName"
+                value={this.state.lastName}
+                onChange={this.handleChange}
+              />
+            </div>
           </div>
-        </div>
 
-        <div>
-          <label>Address</label>
           <div>
-            <input
-              type="text"
-              name="address"
-              value={this.state.address}
-              onChange={this.handleChange}
-            />
+            <label>Address</label>
+            <div>
+              <input
+                type="text"
+                name="address"
+                value={this.state.address}
+                onChange={this.handleChange}
+              />
+            </div>
           </div>
-        </div>
 
-        <div>
-          <label>City </label>
           <div>
-            <input
-              type="text"
-              name="city"
-              value={this.state.city}
-              onChange={this.handleChange}
-            />
+            <label>City </label>
+            <div>
+              <input
+                type="text"
+                name="city"
+                value={this.state.city}
+                onChange={this.handleChange}
+              />
+            </div>
           </div>
-        </div>
 
-        <div>
-          <label>State</label>
           <div>
-            <input
-              type="text"
-              name="state"
-              value={this.state.state}
-              onChange={this.handleChange}
-            />
+            <label>State</label>
+            <div>
+              <input
+                type="text"
+                name="state"
+                value={this.state.state}
+                onChange={this.handleChange}
+              />
+            </div>
           </div>
-        </div>
 
-        <div>
-          <label>Zipcode</label>
           <div>
-            <input
-              type="text"
-              name="zipcode"
-              value={this.state.zipcode}
-              onChange={this.handleChange}
-            />
+            <label>Zipcode</label>
+            <div>
+              <input
+                type="text"
+                name="zipcode"
+                value={this.state.zipcode}
+                onChange={this.handleChange}
+              />
+            </div>
           </div>
-        </div>
 
-        <div>
-          <label>Phone</label>
           <div>
-            <input
-              type="text"
-              name="phone"
-              value={this.state.phone}
-              onChange={this.handleChange}
-            />
+            <label>Phone</label>
+            <div>
+              <input
+                type="text"
+                name="phone"
+                value={this.state.phone}
+                onChange={this.handleChange}
+              />
+            </div>
           </div>
-        </div>
 
-        <div>
-          <label>Email</label>
           <div>
-            <input
-              type="text"
-              name="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-            />
+            <label>Email</label>
+            <div>
+              <input
+                type="text"
+                name="email"
+                value={this.state.email}
+                onChange={this.handleChange}
+              />
+            </div>
           </div>
-        </div>
-        <Stripe />
+          {/* <Stripe /> */}
 
-        <button color="primary" size="lg" type="submit">
-          Complete Payment
-        </button>
-      </form>
+          <button color="primary" size="lg" type="submit">
+            Complete Payment
+          </button>
+        </form>
+      </div>
     )
   }
 }
 //once complete payment, send the info to another thunk that posts to user api route to create a user/ guest(need if else statement for password)
 const mapDispatchToProps = dispatch => {
   return {
-    clearCart: () => dispatch(clearAll())
+    clearCart: () => dispatch(clearAll()),
+    fetchAddUser: user => dispatch(fetchAddUser(user))
   }
 }
 
