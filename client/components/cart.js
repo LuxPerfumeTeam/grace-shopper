@@ -26,11 +26,13 @@ class Cart extends Component {
   }
   add(product) {
     this.props.fetchAddToCart(product)
+
+    this.props.history.push('/cart')
   }
   render() {
     const items = this.props.cart
     // this.props.clearCart()
-    console.log(items)
+    console.log('items', items)
     if (localStorage.length === 0) return <h1> No Items In Cart</h1>
     return (
       <div>
