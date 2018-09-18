@@ -28,7 +28,7 @@ router.get('/', async (req, res, next) => {
   //shop on amazon incognito and nonincognito. then log in - compare carts
   try {
     const order = await Orders.findAll({
-      include: [{model: Product, as: 'orderProducts'}]
+      include: [{model: Product}]
     })
 
     if (order) {
