@@ -28,32 +28,30 @@ class AllProducts extends Component {
     const products = this.props.products
     return (
       <div>
-        <h3>Perfume</h3>
+        <h3>All Perfumes</h3>
+        <div className="row">
         {products.map(product => (
-          <div key={product.id} className="row">
-            <div className="col s12 m4">
+          <div key={product.id} className="col s6 m4">
+              <div className="card">
               <div className="card-image">
-                <img src={product.image} />
-                <span className="card-title" myClassHey>
-                  <i className="material-icons right" />
-                </span>
-                <Link to={`/products/${product.id}`}>{product.name}</Link>
+                <img src={product.image}/>
+              </div>
+                <div className="card-title center-align"><i className="material-icons right"/>
+                  <Link to={`/products/${product.id}`}>{product.name}</Link>
+                </div>
                 <Link to="/cart">
                   <button
-                    className="btn-floating btn-large waves-effect waves-light red"
                     type="submit"
                     name="action"
                     onClick={() => {
                       this.props.fetchAddToCart(product)
                     }}
-                  >
-                    <i className="material-icons right">add</i>
-                  </button>
+                  ><a className="waves-effect waves-light btn"><i className="material-icons">shopping_cart</i> Add to cart</a></button>
                 </Link>
               </div>
             </div>
-          </div>
         ))}
+        </div>
       </div>
     )
   }

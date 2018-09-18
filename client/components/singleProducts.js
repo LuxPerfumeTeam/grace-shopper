@@ -11,28 +11,20 @@ class SingleProduct extends Component {
   }
   render() {
     const selectedProduct = this.props.selectedPerfume
-
     return (
       <div className="row">
-        <div className="col s12 m4">
+        <div className="col s12 m5">
           <div className="card">
-            <div className="card-image">
-              <img src={'/' + selectedProduct.image} />
-              <span className="card-title" myClassHey>
-                <i className="material-icons right" />
-              </span>
+            <div className="card-title center-align"><i className="material-icons right"/>
               {selectedProduct.name}
+              </div>
+            <div className="card-image">
+              <img src={'/' + selectedProduct.image}/>
             </div>
             <Link to="/cart">
               <button
-                className="btn-floating btn-large waves-effect waves-light red"
-                type="submit"
-                name="action"
-                onClick={() => {
-                  this.props.fetchAddToCart(selectedProduct)
-                }}
-              >
-                <i className="material-icons right">add</i>
+                type="submit" name="action" onClick={() => {this.props.fetchAddToCart(selectedProduct)
+                }}><a className="waves-effect waves-light btn"><i className="material-icons center-align">shopping_cart</i> Add to cart</a>
               </button>
             </Link>
           </div>
@@ -43,24 +35,6 @@ class SingleProduct extends Component {
         </div>
       </div>
 
-      // <Link to="/cart"><button type="submit" onClick={() => {this.props.fetchAddToCart(selectedProduct)}}>Add to Cart</button></Link>
-      //   <Link to="/cart">
-      //     <button
-      //       type="submit"
-      //       onClick={() => {
-      //         this.props.fetchAddToCart(selectedProduct)
-      //       }}
-      //     >Add to Cart</button>
-      //   </Link>
-      //   <li key={selectedProduct.id}>
-      //     <h2> {selectedProduct.name}</h2>
-      //     <img src={'/' + selectedProduct.image} />
-      //     {selectedProduct.description}
-      //     {selectedProduct.review}
-      //   </li>
-      // </div>
-      // </div>
-      // </div>
     )
   }
 }

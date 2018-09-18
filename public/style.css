@@ -1,10 +1,13 @@
 body {
-  font-family: sans-serif;
+  font-family: 'cochin regular', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  text-transform: none;
+  color: #404040;
+  line-height: 1.8em;
+
 }
 
-a {
-  text-decoration: none;
-}
 
 label {
   display: block;
@@ -40,7 +43,28 @@ nav {
   height: 60px !important;
 }
 
-myClassHey {
-  font-size: 80px !important;
+.card-title{
+  font-family: 'cochin regular', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  text-transform: none;
+  color: #404040;
+  line-height: 1.8em;
+
+}
+
+.a{
+  font-family: 'cochin regular', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  text-transform: none;
+  color: #404040;
+  line-height: 1.8em;
+
+}
+
+h3{
+  text-align: center;
   font-family: 'Hoefler Text';
 }
+
