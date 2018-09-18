@@ -16,7 +16,7 @@ const Navbar = props => {
           <Link
             to="/"
             className="brand-logo center black-text v-align wrapper"
-            onClick={() => location.reload()}
+            // onClick={() => location.reload()}
           >
             LUXPERFUME
           </Link>
