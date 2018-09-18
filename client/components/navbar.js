@@ -14,7 +14,7 @@ const Navbar = props => {
       <nav>
         <div className="nav-wrapper black-text">
           <Link
-            to="/home"
+            to="/products"
             className="brand-logo center black-text v-align wrapper"
           >
             LUXPERFUME

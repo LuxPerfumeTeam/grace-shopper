@@ -52,7 +52,7 @@ export default class Homepage extends Component {
             </a>
           </div>
           <Link
-            to="/"
+            to="/products"
             className="btn waves-effect white grey-text darken-text-2"
           >
             Shop Now
