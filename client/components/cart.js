@@ -1,7 +1,13 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
-import {fetchCart, clearAll, fetchDeleteFromCart} from '../store/cart'
+import {
+  fetchCart,
+  fetchAddToCart,
+  clearAll,
+  fetchDeleteFromCart,
+  fetchDeleteOneFromCart
+} from '../store/cart'
 import axios from 'axios'
 
 class Cart extends Component {
@@ -9,21 +15,31 @@ class Cart extends Component {
     super(props)
 
     this.remove = this.remove.bind(this)
+    this.add = this.add.bind(this)
+    this.delete = this.delete.bind(this)
   }
   componentDidMount() {
-    this.props.fetchCart()
+    // this.props.fetchCart()
   }
   remove(id) {
     this.props.fetchDeleteFromCart(id)
     this.props.fetchCart()
     this.props.history.push('/cart')
   }
+  async add(product) {
+    await this.props.fetchAddToCart(product)
+    this.props.history.push('/cart')
+  }
 
+  delete(product) {
+    this.props.fetchDeleteOneFromCart(product)
+    this.props.history.push('/cart')
+  }
   render() {
     const items = this.props.cart
-    // this.props.clearCart()
-    console.log(items)
-    if (localStorage.length === 0) return <h1> No Items In Cart</h1>
+    //this.props.clearCart()
+    //changed from if (localStorage.length === 0)
+    if (items.length === 0) return <h1> No Items In Cart</h1>
     return (
       <div>
         <h3>Cart</h3>
@@ -40,11 +56,11 @@ class Cart extends Component {
                 <li>Price: {item.price}</li>
 
                 <div>
-                  <button type="button" onClick={() => item.quantity++}>
+                  <button type="button" onClick={() => this.add(item)}>
                     +
                   </button>
                   <li>{item.quantity}</li>
-                  <button type="button" onClick={() => item.quantity--}>
+                  <button type="button" onClick={() => this.delete(item)}>
                     -
                   </button>
                   <button
@@ -87,7 +103,10 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchCart: () => dispatch(fetchCart()),
     clearCart: () => dispatch(clearAll()),
-    fetchDeleteFromCart: id => dispatch(fetchDeleteFromCart(id))
+    fetchDeleteFromCart: id => dispatch(fetchDeleteFromCart(id)),
+    fetchDeleteOneFromCart: product =>
+      dispatch(fetchDeleteOneFromCart(product)),
+    fetchAddToCart: product => dispatch(fetchAddToCart(product))
   }
 }
 //thunk creator that does axios.post to api/orders to send the order information

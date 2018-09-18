@@ -4,7 +4,7 @@ const ADD_TO_CART = 'ADD_TO_CART'
 const GET_CART = 'GET_CART'
 const CLEAR_CART = 'CLEAR_CART'
 const DELETE_FROM_CART = 'DELETE_CART'
-
+const DELETE_ONE_FROM_CART = 'DELETE_ONE_FROM_CART'
 //empty cart
 
 //INITIAL STATE
@@ -32,6 +32,13 @@ function clearCart() {
     type: CLEAR_CART
   }
 }
+
+function deleteOneFromCart(product) {
+  return {
+    type: DELETE_ONE_FROM_CART,
+    product
+  }
+}
 function deleteFromCart(id) {
   return {
     type: DELETE_FROM_CART,
@@ -40,23 +47,38 @@ function deleteFromCart(id) {
 }
 //THUNK
 
+export const fetchDeleteOneFromCart = product => {
+  //console.log('local storage', localStorage.getItem(1))
+  return dispatch => {
+    const action = deleteOneFromCart(product)
+    dispatch(action)
+  }
+}
 export const fetchDeleteFromCart = id => {
   return dispatch => {
-    // console.log('what is this', JSON.parse(localStorage.removeItem(`${id}`)))
     localStorage.removeItem(`${id}`)
+    console.log('localStorage', localStorage.getItem(id))
 
     const action = deleteFromCart(id)
     dispatch(action)
   }
 }
+
 export const fetchAddToCart = product => {
   return dispatch => {
     const id = product.id
     if (typeof Number(id) === 'number') {
-      localStorage.setItem(`${id}`, JSON.stringify(product))
-      const addedProduct = JSON.parse(localStorage.getItem(`${id}`))
+      const localStorageObj = JSON.parse(localStorage.getItem(id))
+      if (localStorageObj && localStorageObj.id) {
+        localStorageObj.quantity++
+      }
 
-      const action = addToCart(addedProduct)
+      console.log('local storage object', localStorageObj)
+
+      localStorage.setItem(`${id}`, JSON.stringify(product))
+      //const addedProduct = JSON.parse(localStorage.getItem(`${id}`))
+
+      const action = addToCart(product)
       dispatch(action)
     }
   }
@@ -73,7 +95,6 @@ export const fetchCart = () => {
       let value = localStorage[each]
       return JSON.parse(value)
     })
-
     const action = getCart(arrOfProducts)
     dispatch(action)
   }
@@ -86,18 +107,32 @@ export const clearAll = () => {
   }
 }
 
-export default function(state = cart, action) {
+export default function(state = cart.items, action) {
   switch (action.type) {
-    case ADD_TO_CART:
-      console.log('STATE ?? =>', state, 'Action.Product => ', action.product)
-      state.items = [...state.items, action.product]
-      return state
+    case ADD_TO_CART: {
+      const stateCopy = [...state]
+      for (let i = 0; i < stateCopy.length; ++i) {
+        if (stateCopy[i].id === action.product.id) {
+          stateCopy[i].quantity += 1
+          console.log('stateCopy', stateCopy)
+          return stateCopy
+        }
+      }
+      return [...state, action.product]
+    }
     case GET_CART:
       return action.items
     case CLEAR_CART:
       return cart
     case DELETE_FROM_CART:
       return state.filter(each => each.id !== action.id)
+    case DELETE_ONE_FROM_CART:
+      for (let i = 0; i < state.length; ++i) {
+        if (state[i].id === action.product.id) {
+          state[i].quantity--
+        }
+      }
+      return state.filter(each => each.quantity > 0)
     default:
       return state
   }
