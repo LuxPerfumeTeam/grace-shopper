@@ -22,6 +22,7 @@ const Product = db.define('product', {
   },
   image: {
     type: Sequelize.STRING,
+    defaultValue: 'pic1.jpg',
     allowNull: false
   },
   quantity: {
