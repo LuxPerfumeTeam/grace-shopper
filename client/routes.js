@@ -15,6 +15,7 @@ import {
 } from './components'
 import Categories from './components/categories'
 import {me} from './store'
+import Stripe from './components/stripe'
 
 /**
  * COMPONENT
@@ -30,10 +31,11 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
+        <Route exact path="/stripe" component={Stripe} />
         <Route exact path="/cart" component={Cart} />
-        <Route exact path="/" component={AllProducts} />
-        <Route exact path="/home" component={Homepage} />
-        {/* <Route exact path="/products" component={AllProducts} /> */}
+        <Route exact path="/" component={Homepage} />
+        <Route exact path="/products" component={AllProducts} />
+
         <Route path="/BuyingForm" component={BuyingForm} />
         <Route path="/products/:productId" component={SingleProduct} />
         <Route exact path="/category/:categoryName" component={Categories} />
