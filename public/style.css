@@ -18,14 +18,24 @@ form div {
 .carousel .carousel-item {
   width: 700px !important;
   height: 500px !important;
+
+  transition: opacity 0.1s ease-in-out 0s;
 }
 
 .nav-wrapper {
-  background-color: beige !important;
-  font-size: 14px;
-  font-weight: bold;
+  background-color: whitesmoke !important;
+  font-size: 80px !important;
+  /* font-weight: bold; */
+  font-family: 'Hoefler Text';
+  height: 100%;
+  /* text-transform: uppercase; */
 }
-
+.v-align wrapper {
+  height: 100%;
+}
 .black-text li a {
   color: black;
+}
+nav {
+  height: 100px !important;
 }
