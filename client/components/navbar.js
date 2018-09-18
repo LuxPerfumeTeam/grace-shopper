@@ -10,7 +10,7 @@ const Navbar = props => {
   const {handleClick, isLoggedIn, isLoggedInAdmin} = props
 
   return (
-    <div className="navbar-fixed">
+    <div>
       <nav>
         <div className="nav-wrapper black-text">
           <Link
@@ -50,6 +50,9 @@ const Navbar = props => {
               <Fragment>
                 <li>
                   <Link to="/admin/home">My Admin Account</Link>
+                  <Link to="/admin/addproduct">Add/Edit Products</Link>
+                  <Link to="/admin/addcategory">Add/Edit Categories</Link>
+                  <Link to="/admin/orders">Orders</Link>
                 </li>
                 <li>
                   <a href="#" onClick={handleClick}>
@@ -70,6 +73,7 @@ const Navbar = props => {
           </ul>
         </div>
       </nav>
+      <hr />
     </div>
   )
 }

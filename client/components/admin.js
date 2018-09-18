@@ -1,34 +1,21 @@
 import React, {Component} from 'react'
-// import {connect} from 'react-redux'
-import AdminCategoryForm from './adminCategoryForm'
-import AdminProductForm from './adminProductForm '
+import {connect} from 'react-redux'
 
-export default class Admin extends Component {
-  // componentDidMount() {
-  //   this.props.fetchOrders()
-  // }
+class Admin extends Component {
   render() {
+    const name = this.props.firstName
+    const lastName = this.props.lastName
     return (
       <div>
-        <h3>Welcome Admin</h3>
-        <h3> Add a New Category </h3>
-        <AdminCategoryForm />
-
-        <h3> Add a New Product </h3>
-        <AdminProductForm />
-
-        <h3> My Orders: </h3>
+        <h3>Welcome {name + ' ' + lastName}</h3>
+        <p>Admin Dashboard </p>
       </div>
     )
   }
 }
+const mapStateToProps = state => ({
+  firstName: state.user.firstName,
+  lastName: state.user.lastName
+})
 
-// const mapStateToProps = state => {
-//   return {
-//     user: state.user
-//   }
-// }
-
-// const mapDispatchToProps = dispatch => ({})
-
-// export default connect(mapStateToProps)(Admin)
+export default connect(mapStateToProps, null)(Admin)
