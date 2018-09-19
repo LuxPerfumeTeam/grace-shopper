@@ -25,6 +25,10 @@ form div {
   transition: opacity 0.1s ease-in-out 0s;
 }
 
+h4 {
+  font-family: 'cochin regular';
+  text-align: center;
+}
 .nav-wrapper {
   background-color: whitesmoke !important;
   font-size: 90px !important;
@@ -42,6 +46,30 @@ form div {
 nav {
   height: 60px !important;
 }
+
+.cart {
+  font-family: 'cochin-regular';
+  text-align: center;
+  font-size: 20px;
+}
+.container {
+  padding-top: 10px;
+}
+.img {
+  height: 50px;
+  width: 50px;
+
+
+h4 {
+  font-family: 'Hoefler Text';
+  height: 100%;
+}
+table {
+  font-family: 'Hoefler Text';
+  font-size: 20px;
+
+}
+
 
 .card-title{
   font-family: 'cochin regular', Arial, 'Helvetica Neue', Helvetica, sans-serif;
@@ -76,4 +104,5 @@ div span
 .card {
   overflow: visible !important;
 }
+
 

@@ -43,6 +43,7 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
+    "google-fonts": "^1.0.0",
     "history": "^4.6.3",
     "materialize-css": "^1.0.0",
     "morgan": "^1.8.1",
