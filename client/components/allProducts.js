@@ -15,7 +15,6 @@ class AllProducts extends Component {
       quantity: 1,
       userOrderId: 1
     }
-    // this.addToCart = this.addToCart.bind(this)
   }
   componentDidMount() {
     this.props.fetchProducts()
@@ -25,40 +24,35 @@ class AllProducts extends Component {
     this.setState({[event.target.name]: event.target.value})
   }
 
-  // addToCart(selectedProduct) {
-  //   this.props.postToCart({
-  //     orderProductsId: 6,
-  //     name: selectedProduct.name,
-  //     quantity: 1,
-  //     userOrderId: 1
-  //   })
-  // }
-
   render() {
     const products = this.props.products
     return (
       <div>
-        <h3>Perfume</h3>
-
+        <h3>All Perfumes</h3>
+        <div className="row">
         {products.map(product => (
-          <div key={product.id}>
-            <Link to={`/products/${product.id}`}>
-              <img src={product.image} />
-              {product.name}
-            </Link>
-            <Link to="/cart">
-              <button
-                type="submit"
-                onClick={() => {
-                  console.log('clicking')
-                  this.props.fetchAddToCart(product)
-                }}
-              >
-                Add to Cart
-              </button>
-            </Link>
-          </div>
+          <div key={product.id} className="col s6 m4">
+              <div className="card">
+                <div className="card-image">
+                  <img src={'/' + product.image}/>
+                </div>
+                <div className="card-title center-align black-text"><i className="material-icons right"/>
+                  <Link to={`/products/${product.id}`}><div><span>{product.name}</span></div></Link>
+                </div>
+                <p className="center-align">
+                <Link to="/cart">
+                  <button
+                    type="submit"
+                    name="action"
+                    onClick={() => {
+                      this.props.fetchAddToCart(product)
+                    }}
+                  ><a className="waves-effect waves-light btn"><i className="material-icons center-align">shopping_cart</i> Add to cart</a></button>
+                </Link></p>
+              </div>
+            </div>
         ))}
+        </div>
       </div>
     )
   }

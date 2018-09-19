@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link, withRouter} from 'react-router-dom'
 import {logout} from '../store'
+import SearchForm from './search'
 
 const categoryArr = ['Men', 'Women']
 
@@ -10,16 +11,19 @@ const Navbar = props => {
   const {handleClick, isLoggedIn, isLoggedInAdmin} = props
 
   return (
-    <div className="navbar-fixed">
+    <div>
       <nav>
         <div className="nav-wrapper black-text">
           <Link
             to="/"
             className="brand-logo center black-text v-align wrapper"
-            onClick={() => location.reload()}
+            // onClick={() => location.reload()}
           >
             LUXPERFUME
           </Link>
+
+          <SearchForm />
+
           <ul className="left hide-on-med-and-down black-text">
             {categoryArr.map(each => {
               return (
@@ -50,6 +54,9 @@ const Navbar = props => {
               <Fragment>
                 <li>
                   <Link to="/admin/home">My Admin Account</Link>
+                  <Link to="/admin/addproduct">Add/Edit Products</Link>
+                  <Link to="/admin/addcategory">Add/Edit Categories</Link>
+                  <Link to="/admin/orders">Orders</Link>
                 </li>
                 <li>
                   <a href="#" onClick={handleClick}>
@@ -70,6 +77,7 @@ const Navbar = props => {
           </ul>
         </div>
       </nav>
+      <hr />
     </div>
   )
 }

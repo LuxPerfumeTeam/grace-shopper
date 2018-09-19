@@ -11,11 +11,16 @@ import {
   Cart,
   BuyingForm,
   Admin,
-  Homepage
+  addProduct,
+  addCategory,
+  Orders,
+  Homepage,
+  adminEditProduct
 } from './components'
 import Categories from './components/categories'
 import {me} from './store'
 import Stripe from './components/stripe'
+import {fetchCart} from './store/cart'
 
 /**
  * COMPONENT
@@ -47,6 +52,8 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/home" component={UserHome} />
             <Route path="/products/:productId" component={SingleProduct} />
+            <Route path="/BuyingForm" component={BuyingForm} />
+            <Route exact path="/" component={AllProducts} />
             <Route
               exact
               path="/category/:categoryName"
@@ -60,10 +67,20 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/admin/home" component={Admin} />
             <Route path="/products/:productId" component={SingleProduct} />
+            <Route path="/BuyingForm" component={BuyingForm} />
+            <Route exact path="/" component={AllProducts} />
             <Route
               exact
               path="/category/:categoryName"
               component={Categories}
+            />
+            <Route exact path="/admin/addproduct" component={addProduct} />
+            <Route exact path="/admin/addcategory" component={addCategory} />
+            <Route exact path="/admin/orders" component={Orders} />
+            <Route
+              exact
+              path="/admin/editProduct/:id"
+              component={adminEditProduct}
             />
           </Switch>
         )}
@@ -91,6 +108,7 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me())
+      dispatch(fetchCart())
     }
   }
 }

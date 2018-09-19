@@ -1,11 +1,11 @@
 //create a homepage eventully
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
 import Materialize from 'materialize-css'
 
-export default class Homepage extends Component {
+class Homepage extends Component {
   componentDidMount() {
-    document.addEventListener('DOMContentLoaded', () => {
+    ;(window.onload = () => {
       let elems = document.querySelectorAll('.carousel')
       let instances = Materialize.Carousel.init(elems, {
         indicators: true,
@@ -16,7 +16,7 @@ export default class Homepage extends Component {
       setInterval(() => {
         carousel.next()
       }, 4000)
-    })
+    })()
   }
 
   render() {
@@ -54,7 +54,7 @@ export default class Homepage extends Component {
           </div>
           <Link
             to="/products"
-            className="btn waves-effect white grey-text darken-text-2"
+            className="btn waves-effect white grey-text darken-text-2 shop"
           >
             Shop Now
           </Link>
@@ -63,3 +63,4 @@ export default class Homepage extends Component {
     )
   }
 }
+export default withRouter(Homepage)

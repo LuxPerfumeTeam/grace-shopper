@@ -39,30 +39,32 @@ class Categories extends Component {
     }
     return (
       <div>
-        <h2>{gender}</h2>
-        {genderCategory.map(product => {
-          return (
-            <div key={product.id}>
-              <Link to={`/products/${product.id}`}>
-                <img src={'/' + product.image} />
-
-                {product.name}
-              </Link>
-              {product.price}
-
-              <Link to="/cart">
-                <button
-                  type="submit"
-                  onClick={() => {
-                    this.props.fetchAddToCart(product)
-                  }}
-                >
-                  Add to Cart
-                </button>
-              </Link>
+        <h3>{gender}</h3>
+        <div className="row">
+          {genderCategory.map(product => (
+            <div key={product.id} className="col s6 m4">
+              <div className="card">
+                <div className="card-image">
+                  <img src={'/' + product.image}/>
+                </div>
+                <div className="card-title center-align black-text"><i className="material-icons right"/>
+                  <Link to={`/products/${product.id}`}><div><span>{product.name}</span></div>
+                  </Link>
+                </div>
+                <p className="center-align">
+                <Link to="/cart">
+                  <button
+                    type="submit"
+                    name="action"
+                    onClick={() => {
+                      this.props.fetchAddToCart(product)
+                    }}
+                  ><a className="waves-effect waves-light btn"><i className="material-icons">shopping_cart</i> Add to cart</a></button>
+                </Link></p>
+              </div>
             </div>
-          )
-        })}
+          ))}
+        </div>
       </div>
     )
   }

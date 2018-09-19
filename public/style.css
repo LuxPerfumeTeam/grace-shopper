@@ -1,10 +1,13 @@
 body {
-  font-family: sans-serif;
+  font-family: 'cochin regular', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  text-transform: none;
+  color: #404040;
+  line-height: 1.8em;
+
 }
 
-a {
-  text-decoration: none;
-}
 
 label {
   display: block;
@@ -22,9 +25,13 @@ form div {
   transition: opacity 0.1s ease-in-out 0s;
 }
 
+h4 {
+  font-family: 'cochin regular';
+  text-align: center;
+}
 .nav-wrapper {
   background-color: whitesmoke !important;
-  font-size: 80px !important;
+  font-size: 90px !important;
   /* font-weight: bold; */
   font-family: 'Hoefler Text';
   height: 100%;
@@ -39,3 +46,63 @@ form div {
 nav {
   height: 60px !important;
 }
+
+.cart {
+  font-family: 'cochin-regular';
+  text-align: center;
+  font-size: 20px;
+}
+.container {
+  padding-top: 10px;
+}
+.img {
+  height: 50px;
+  width: 50px;
+
+
+h4 {
+  font-family: 'Hoefler Text';
+  height: 100%;
+}
+table {
+  font-family: 'Hoefler Text';
+  font-size: 20px;
+
+}
+
+
+.card-title{
+  font-family: 'cochin regular', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  text-transform: none;
+  color: #404040;
+  line-height: 1.8em;
+
+}
+
+a{
+  font-family: 'cochin regular', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  text-transform: none;
+  color: black;
+  line-height: 1.8em;
+}
+
+h3{
+  text-align: center;
+  font-family: 'Hoefler Text';
+}
+
+div span
+{
+  color: black;
+  font-family: 'cochin regular', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+}
+
+.card {
+  overflow: visible !important;
+}
+
+

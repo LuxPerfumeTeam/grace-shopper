@@ -2,6 +2,9 @@ import axios from 'axios'
 
 //ACTION TYPES
 const GET_PRODUCTS = 'GET_PRODUCTS'
+const ADD_PRODUCTS = 'ADD_PRODUCTS'
+const EDIT_PRODUCTS = 'EDIT_PRODUCTS'
+const DELETE_PRODUCT = 'DELETE_PRODUCT'
 //change to store/set... in store
 
 //initial state
@@ -23,11 +26,58 @@ const getProducts = products => {
   }
 }
 
+const addProducts = product => {
+  return {
+    type: ADD_PRODUCTS,
+    product
+  }
+}
+
+const editProducts = product => {
+  return {
+    type: EDIT_PRODUCTS,
+    product
+  }
+}
+
+const deleteProduct = product => {
+  return {
+    type: DELETE_PRODUCT,
+    product
+  }
+}
+
 //THUNK
 export const fetchProducts = () => async dispatch => {
   try {
     const products = await axios.get('/api/products')
-    dispatch(getProducts(products.data || defaultProducts)) //not needed for defaultProducts
+    dispatch(getProducts(products.data || defaultProducts))
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const addNewProduct = product => async dispatch => {
+  try {
+    const res = await axios.post('/api/products', product)
+    dispatch(addProducts(res.data))
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const deleteAProduct = productId => {
+  return async dispatch => {
+    const {data} = await axios.delete(`/api/products/${productId}`)
+    const action = deleteProduct(data)
+    dispatch(action)
+  }
+}
+
+export const editProduct = (id, product) => async dispatch => {
+  try {
+    const products = await axios.put(`/api/products/${id}`, product)
+    dispatch(editProducts(products.data || defaultProducts))
   } catch (error) {
     console.error(error)
   }
@@ -38,7 +88,14 @@ export default function(state = defaultProducts, action) {
   switch (action.type) {
     case GET_PRODUCTS:
       return action.products
-
+    case ADD_PRODUCTS: {
+      return [...state, action.product]
+    }
+    case EDIT_PRODUCTS: {
+      return action.product
+    }
+    case DELETE_PRODUCT:
+      return action.product
     default:
       return state
   }
