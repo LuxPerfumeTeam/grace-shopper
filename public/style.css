@@ -53,18 +53,27 @@ nav {
 
 }
 
-.a{
+a{
   font-family: 'cochin regular', Arial, 'Helvetica Neue', Helvetica, sans-serif;
   font-weight: normal;
   font-size: 16px;
   text-transform: none;
-  color: #404040;
+  color: black;
   line-height: 1.8em;
-
 }
 
 h3{
   text-align: center;
   font-family: 'Hoefler Text';
+}
+
+div span
+{
+  color: black;
+  font-family: 'cochin regular', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+}
+
+.card {
+  overflow: visible !important;
 }
 

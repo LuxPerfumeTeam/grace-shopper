@@ -21,12 +21,13 @@ class SingleProduct extends Component {
             <div className="card-image">
               <img src={'/' + selectedProduct.image}/>
             </div>
+            <p className="center-align">
             <Link to="/cart">
               <button
                 type="submit" name="action" onClick={() => {this.props.fetchAddToCart(selectedProduct)
-                }}><a className="waves-effect waves-light btn"><i className="material-icons center-align">shopping_cart</i> Add to cart</a>
+                }}><a className="waves-effect waves-light btn center-align"><i className="material-icons">shopping_cart</i> Add to cart</a>
               </button>
-            </Link>
+            </Link></p>
           </div>
           <div className="card-content">
             <p>{selectedProduct.description}</p>

@@ -45,11 +45,13 @@ class Categories extends Component {
             <div key={product.id} className="col s6 m4">
               <div className="card">
                 <div className="card-image">
-                  <img src={product.image}/>
+                  <img src={'/' + product.image}/>
                 </div>
-                <div className="card-title center-align"><i className="material-icons right"/>
-                  <Link to={`/products/${product.id}`}>{product.name}</Link>
+                <div className="card-title center-align black-text"><i className="material-icons right"/>
+                  <Link to={`/products/${product.id}`}><div><span>{product.name}</span></div>
+                  </Link>
                 </div>
+                <p className="center-align">
                 <Link to="/cart">
                   <button
                     type="submit"
@@ -58,7 +60,7 @@ class Categories extends Component {
                       this.props.fetchAddToCart(product)
                     }}
                   ><a className="waves-effect waves-light btn"><i className="material-icons">shopping_cart</i> Add to cart</a></button>
-                </Link>
+                </Link></p>
               </div>
             </div>
           ))}
