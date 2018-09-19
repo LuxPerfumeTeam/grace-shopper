@@ -111,6 +111,7 @@ class Cart extends Component {
                       Clear Cart
                     </button> */}
                   </td>
+
                   <td>
                     Total:
                     {items.length &&
