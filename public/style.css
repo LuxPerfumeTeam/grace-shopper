@@ -43,6 +43,7 @@ h4 {
 nav {
   height: 60px !important;
 }
+<<<<<<< HEAD
 .cart {
   font-family: 'cochin-regular';
   text-align: center;
@@ -54,4 +55,14 @@ nav {
 .img {
   height: 50px;
   width: 50px;
+=======
+
+h4 {
+  font-family: 'Hoefler Text';
+  height: 100%;
+}
+table {
+  font-family: 'Hoefler Text';
+  font-size: 20px;
+>>>>>>> 7d8aaf655e40d92654612628863cd319677c634b
 }

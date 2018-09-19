@@ -88,7 +88,7 @@ export const fetchCart = () => {
   return dispatch => {
     const arrOfId = Object.keys(localStorage)
     const uniqueArrId = arrOfId.filter(function(item, pos, self) {
-      return self.indexOf(item) === pos
+      return self.indexOf(item) === pos && item.length < 3
     })
     console.log(arrOfId)
     const arrOfProducts = uniqueArrId.map(each => {
@@ -102,8 +102,8 @@ export const fetchCart = () => {
 
 export const clearAll = () => {
   return dispatch => {
-    localStorage.clear()
     dispatch(clearCart())
+    localStorage.clear()
   }
 }
 

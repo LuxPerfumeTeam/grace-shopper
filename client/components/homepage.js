@@ -54,7 +54,7 @@ class Homepage extends Component {
           </div>
           <Link
             to="/products"
-            className="btn waves-effect white grey-text darken-text-2"
+            className="btn waves-effect white grey-text darken-text-2 shop"
           >
             Shop Now
           </Link>
