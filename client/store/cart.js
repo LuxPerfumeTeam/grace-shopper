@@ -50,8 +50,16 @@ function deleteFromCart(id) {
 export const fetchDeleteOneFromCart = product => {
   //console.log('local storage', localStorage.getItem(1))
   return dispatch => {
-    const action = deleteOneFromCart(product)
-    dispatch(action)
+    const id = product.id
+    if (typeof Number(id) === 'number') {
+      const localStorageObj = JSON.parse(localStorage.getItem(id))
+      if (localStorageObj && localStorageObj.id) {
+        localStorageObj.quantity--
+      }
+
+      const action = deleteOneFromCart(product)
+      dispatch(action)
+    }
   }
 }
 export const fetchDeleteFromCart = id => {
@@ -73,11 +81,10 @@ export const fetchAddToCart = product => {
         localStorageObj.quantity++
       }
 
-      console.log('local storage object', localStorageObj)
-
       localStorage.setItem(`${id}`, JSON.stringify(product))
       //const addedProduct = JSON.parse(localStorage.getItem(`${id}`))
-
+      console.log('local storage object', localStorage.getItem(id))
+      console.log('local storage', localStorage)
       const action = addToCart(product)
       dispatch(action)
     }
@@ -101,9 +108,9 @@ export const fetchCart = () => {
 }
 
 export const clearAll = () => {
+  localStorage.clear()
   return dispatch => {
-    localStorage.clear()
-    dispatch(clearCart())
+    dispatch(fetchCart())
   }
 }
 
@@ -114,7 +121,7 @@ export default function(state = cart.items, action) {
       for (let i = 0; i < stateCopy.length; ++i) {
         if (stateCopy[i].id === action.product.id) {
           stateCopy[i].quantity += 1
-          console.log('stateCopy', stateCopy)
+
           return stateCopy
         }
       }
