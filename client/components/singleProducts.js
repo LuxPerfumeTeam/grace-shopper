@@ -9,29 +9,33 @@ class SingleProduct extends Component {
     const productId = Number(this.props.match.params.productId)
     this.props.fetchSingleProduct(productId)
   }
-
   render() {
     const selectedProduct = this.props.selectedPerfume
-
     return (
-      <div>
-        <Link to="/cart">
-          <button
-            type="submit"
-            onClick={() => {
-              this.props.fetchAddToCart(selectedProduct)
-            }}
-          >
-            Add to Cart
-          </button>
-        </Link>
-        <li key={selectedProduct.id}>
-          <h2> {selectedProduct.name}</h2>
-          <img src={'/' + selectedProduct.image} />
-          {selectedProduct.description}
-          {selectedProduct.review}
-        </li>
+      <div className="row">
+        <div className="col s12 m5">
+          <div className="card">
+            <div className="card-title center-align"><i className="material-icons right"/>
+              {selectedProduct.name}
+              </div>
+            <div className="card-image">
+              <img src={'/' + selectedProduct.image}/>
+            </div>
+            <p className="center-align">
+            <Link to="/cart">
+              <button
+                type="submit" name="action" onClick={() => {this.props.fetchAddToCart(selectedProduct)
+                }}><a className="waves-effect waves-light btn center-align"><i className="material-icons">shopping_cart</i> Add to cart</a>
+              </button>
+            </Link></p>
+          </div>
+          <div className="card-content">
+            <p>{selectedProduct.description}</p>
+            <p>{selectedProduct.review}</p>
+          </div>
+        </div>
       </div>
+
     )
   }
 }
