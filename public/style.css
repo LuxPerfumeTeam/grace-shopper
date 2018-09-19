@@ -43,3 +43,15 @@ h4 {
 nav {
   height: 60px !important;
 }
+.cart {
+  font-family: 'cochin-regular';
+  text-align: center;
+  font-size: 20px;
+}
+.container {
+  padding-top: 10px;
+}
+.img {
+  height: 50px;
+  width: 50px;
+}

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {addNewCategory} from '../store/categories'
+import {addNewCategories} from '../store/categories'
 
 class AdminCategoryForm extends Component {
   constructor() {
@@ -13,14 +13,12 @@ class AdminCategoryForm extends Component {
   }
 
   handleChange(evt) {
-    this.setState({
-      name: evt.target.value
-    })
+    this.setState({[evt.target.name]: evt.target.value})
   }
 
   handleSubmit(evt) {
     evt.preventDefault()
-    this.props.addNewCategory(this.state)
+    this.props.addNewCategories(this.state)
     this.setState({
       name: ''
     })
@@ -31,12 +29,14 @@ class AdminCategoryForm extends Component {
       <form onSubmit={this.handleSubmit}>
         <div>
           <div>
-            <label>Category</label>
+            <h3> Add a New Category </h3>
+            <label>Category Name</label>
             <input
               name="name"
               type="text"
               onChange={this.handleChange}
               value={this.state.name}
+              placeholder="..."
             />
           </div>
           <button type="submit">Submit</button>
@@ -47,11 +47,11 @@ class AdminCategoryForm extends Component {
 }
 
 const mapState = state => ({
-  categories: state.categories
+  category: state.category
 })
 
 const mapDispatch = dispatch => ({
-  addNewCategory: category => dispatch(addNewCategory(category))
+  addNewCategories: category => dispatch(addNewCategories(category))
 })
 
 export default connect(mapState, mapDispatch)(AdminCategoryForm)

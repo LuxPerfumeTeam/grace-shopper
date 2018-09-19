@@ -23,6 +23,7 @@ router.get('/category/:categoryName', async (req, res, next) => {
     next(err)
   }
 })
+
 router.get('/category', async (req, res, next) => {
   try {
     const category = await Category.findAll()
@@ -32,12 +33,25 @@ router.get('/category', async (req, res, next) => {
     next(err)
   }
 })
-router.get('/category', async (req, res, next) => {
+
+// router.get('/category', async (req, res, next) => {
+//   try {
+//     const category = await Category.findAll()
+//     res.json(category)
+//   } catch (err) {
+//     console.log('error with express route to get all perfume')
+//     next(err)
+//   }
+// })
+
+router.post('/category', async (req, res, next) => {
   try {
-    const category = await Category.findAll()
+    let category = await Category.create({
+      name: req.body.name
+    })
     res.json(category)
   } catch (err) {
-    console.log('error with express route to get all perfume')
+    console.log('post route broken')
     next(err)
   }
 })
@@ -61,6 +75,22 @@ router.get('/:productId', async (req, res, next) => {
   }
 })
 
+router.post('/', async (req, res, next) => {
+  try {
+    let product = await Product.create({
+      name: req.body.name,
+      description: req.body.description,
+      inventory: req.body.inventory,
+      price: req.body.price,
+      image: req.body.image
+    })
+    res.json(product)
+  } catch (err) {
+    console.log('post route broken')
+    next(err)
+  }
+})
+
 router.get('/', async (req, res, next) => {
   try {
     const products = await Product.findAll({
@@ -69,6 +99,33 @@ router.get('/', async (req, res, next) => {
     res.json(products)
   } catch (err) {
     console.log('error with express route to get all perfume')
+    next(err)
+  }
+})
+
+router.put('/:id', async (req, res, next) => {
+  try {
+    const updated = await Product.update(req.body, {
+      where: {id: req.params.id}
+    })
+    const all = await Product.findAll()
+    res.status(201).json(all)
+  } catch (err) {
+    next(err)
+  }
+})
+
+//DELETE
+router.delete('/:productId', async (req, res, next) => {
+  try {
+    const deleted = await Product.destroy({
+      where: {
+        id: req.params.productId
+      }
+    })
+    const updated = await Product.findAll()
+    res.json(updated)
+  } catch (err) {
     next(err)
   }
 })
