@@ -36,68 +36,113 @@ class Cart extends Component {
     this.props.history.push('/cart')
   }
   render() {
-    // localStorage.clear()
+    //localStorage.clear()
     const items = this.props.cart
     if (items.length === 0) return <h1> No Items In Cart</h1>
     return (
-      <div>
-        <h3>Cart</h3>
-        <ul>
-          {items.length &&
-            items.map(item => (
-              <div key={item.id}>
-                <li>
-                  <Link to={`/products/${item.id}`}>Name: {item.name}</Link>
-                </li>
-                <li>
-                  <img src={item.image} />
-                </li>
-                <li>Price: {item.price}</li>
+      <div className="container">
+        <h4 className="center-align">Shopping Cart</h4>
+        <div className="row">
+          <div className="col s12">
+            <table className="highlight">
+              <thead>
+                <tr className="cart">
+                  <th className="col-s2">Item</th>
+                  <th className="col-s2">Quantity</th>
+                  <th className="col-s2">Price</th>
+                  <th className="col-s2">Subtotal</th>
+                  <th className="col-s4" />
+                </tr>
+              </thead>
+              <tbody>
+                {items.length &&
+                  items.map(item => (
+                    <tr key={item.id} className="v-align wrapper">
+                      <td>
+                        <Link to={`/products/${item.id}`}>{item.name}</Link>
+                        {/* <img className="img" src={item.image} /> */}
+                      </td>
+                      <td>{item.quantity}</td>
+                      <td>{item.price}</td>
+                      <td>{item.quantity * item.price}</td>
+                      <td>
+                        <a className="btn-floating btn-small waves-effect waves-light ">
+                          <i
+                            className="material-icons"
+                            onClick={() => this.add(item)}
+                          >
+                            add
+                          </i>
+                        </a>
+                        <a className="btn-floating btn-small waves-effect waves-light">
+                          <i
+                            className="material-icons"
+                            onClick={() => this.delete(item)}
+                          >
+                            remove
+                          </i>
+                        </a>
+                        <a className="btn-floating btn-small waves-effect waves-light">
+                          <i
+                            className="material-icons"
+                            onClick={() => this.remove(item.id)}
+                          >
+                            clear
+                          </i>
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+                <tr>
+                  <td>
+                    <a className="btn-floating btn-small waves-effect waves-light grey lighten-3">
+                      <i
+                        className="material-icons"
+                        onClick={() => this.props.clearCart()}
+                      >
+                        clear
+                      </i>
+                    </a>
 
-                <div>
-                  <button type="button" onClick={() => this.add(item)}>
-                    +
-                  </button>
-                  <li>{item.quantity}</li>
-                  <button type="button" onClick={() => this.delete(item)}>
-                    -
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      this.remove(item.id)
-                      //make thunk creator like the rest to update the delete in the store
-                    }}
-                  >
-                    remove
-                  </button>
-                </div>
-              </div>
-            ))}
-        </ul>
-
-        <button type="button" onClick={() => this.props.clearCart()}>
-          clearCart
-        </button>
-        <div>
-          Total:
-          {items.length &&
-            items
-              .map(each => each.price * each.quantity)
-              .reduce((a, b) => a + b)}
+                    {/* <button
+                      type="button"
+                      onClick={() => this.props.clearCart()}
+                    >
+                      Clear Cart
+                    </button> */}
+                  </td>
+                  <td>
+                    Total:
+                    {items.length &&
+                      items
+                        .map(each => each.price * each.quantity)
+                        .reduce((a, b) => a + b)}
+                  </td>
+                  <td>
+                    <button
+                      type="button"
+                      onClick={async () => {
+                        await axios.post('api/order', items)
+                      }}
+                    >
+                      <Link
+                        to="/buyingForm"
+                        className="btn waves-effect white grey-text darken-text-2 shop"
+                      >
+                        Checkout
+                      </Link>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-        <button
-          type="button"
-          onClick={async () => {
-            await axios.post('api/order', items)
-          }}
-        >
-          <Link to="/buyingForm">Checkout</Link>
-        </button>
       </div>
     )
   }
 }
+
 const mapDispatchToProps = dispatch => {
   return {
     fetchCart: () => dispatch(fetchCart()),

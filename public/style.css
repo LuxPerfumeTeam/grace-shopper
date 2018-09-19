@@ -39,3 +39,12 @@ form div {
 nav {
   height: 60px !important;
 }
+
+h4 {
+  font-family: 'Hoefler Text';
+  height: 100%;
+}
+table {
+  font-family: 'Hoefler Text';
+  font-size: 20px;
+}

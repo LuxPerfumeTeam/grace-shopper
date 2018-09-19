@@ -102,8 +102,8 @@ export const fetchCart = () => {
 
 export const clearAll = () => {
   return dispatch => {
-    localStorage.clear()
     dispatch(clearCart())
+    localStorage.clear()
   }
 }
 
