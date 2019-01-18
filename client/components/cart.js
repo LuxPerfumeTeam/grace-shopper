@@ -20,10 +20,8 @@ class Cart extends Component {
   }
 
   render() {
-    //localStorage.clear()
     const items = this.props.cart
-    // this.props.clearCart()
-    console.log(items)
+
     if (localStorage.length === 0) return <h1> No Items In Cart</h1>
     return (
       <div className="container">
@@ -89,13 +87,6 @@ class Cart extends Component {
                         clear
                       </i>
                     </a>
-
-                    {/* <button
-                      type="button"
-                      onClick={() => this.props.clearCart()}
-                    >
-                      Clear Cart
-                    </button> */}
                   </td>
 
                   <td>

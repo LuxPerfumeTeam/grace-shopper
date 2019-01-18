@@ -77,9 +77,9 @@ router.post('/', async (req, res, next) => {
 })
 
 router.delete('/:productId', async (req, res, next) => {
-  const product = await Orders.findById(req.params.productId)
-  if (!product) return res.sendStatus(404)
   try {
+    const product = await Orders.findById(req.params.productId)
+    if (!product) return res.sendStatus(404)
     await Orders.destroy({
       where: {
         id: req.params.id
